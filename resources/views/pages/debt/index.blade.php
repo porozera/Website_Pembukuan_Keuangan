@@ -50,7 +50,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @php $number = 1; @endphp
+                                    @php
+                                        $number = ($debt->currentPage() - 1) * $debt->perPage() + 1; 
+                                    @endphp
                                     @foreach ($debt as $item )
                                     <tr>
                                         <td class="align-middle text-center text-sm px-3">
@@ -99,9 +101,12 @@
                                         </td>                                        
                                     </tr>
                                     @endforeach
+
                                 </tbody>
                             </table>
-                        </div>
+                            <div class="card-footer">
+                                {{ $debt->links('vendor.pagination.bootstrap-5') }}
+                            </div>                            
                     </div>
                 </div>
             </div>
