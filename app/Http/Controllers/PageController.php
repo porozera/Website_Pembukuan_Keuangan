@@ -45,4 +45,9 @@ class PageController extends Controller
     {
         return view("pages.sign-up-static");
     }
+
+    public function debt()
+    {
+        return view("pages.debt.index");
+    }
 }
