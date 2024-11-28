@@ -7,11 +7,20 @@ use Illuminate\Http\Request;
 
 class DebtController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $debt = Debt::orderBy('created_at', 'desc')->paginate(4);
+        $query = Debt::query();
+    
+        // Sorting
+        if ($request->has('sort') && $request->has('direction')) {
+            $query->orderBy($request->input('sort'), $request->input('direction'));
+        }
+    
+        $debt = $query->paginate(4);
+    
         return view('pages.debt.index', compact('debt'));
     }
+    
     
 
     public function add(){

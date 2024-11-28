@@ -1,8 +1,8 @@
 <style>
     .page-item.active .page-link {
     color: white !important;
-    background-color: #007bff !important; /* Ubah warna latar belakang jika diperlukan */
-    border-color: #007bff !important; /* Ubah warna border jika diperlukan */
+    background-color: #5e72e4 !important;
+    border-color: #5e72e4 !important;
 }
 </style>
 @if ($paginator->hasPages())

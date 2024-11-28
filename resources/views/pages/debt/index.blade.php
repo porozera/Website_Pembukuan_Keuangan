@@ -16,7 +16,9 @@
                             <div class="col d-flex justify-content-between align-items-center">
                                 <h6>Debts table</h6>
                                 <button class="btn btn-primary btn-sm">
-                                    <a href="/debt/add" class="text-white">Add Debts</a>
+                                    <a href="/debt/add" class="text-white">
+                                        Add Debts <i class="fa fa-plus"></i>
+                                    </a>
                                 </button>
                             </div>
                         </div>
@@ -27,28 +29,44 @@
                                 <thead>
                                     <tr>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
-                                            No
+                                            <a href="{{ request()->fullUrlWithQuery(['sort' => 'id', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc']) }}">
+                                                No
+                                                <i class="fa {{ request('sort') === 'id' ? (request('direction') === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : 'fa-sort' }}"></i>
+                                            </a>
                                         </th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
-                                            Amount
+                                            <a href="{{ request()->fullUrlWithQuery(['sort' => 'amount', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc']) }}">
+                                                Amount
+                                                <i class="fa {{ request('sort') === 'amount' ? (request('direction') === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : 'fa-sort' }}"></i>
+                                            </a>
                                         </th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
-                                            Interest Rate
+                                            <a href="{{ request()->fullUrlWithQuery(['sort' => 'interest_rate', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc']) }}">
+                                                Interest Rate
+                                                <i class="fa {{ request('sort') === 'interest_rate' ? (request('direction') === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : 'fa-sort' }}"></i>
+                                            </a>
                                         </th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
-                                            Due Date
+                                            <a href="{{ request()->fullUrlWithQuery(['sort' => 'due_date', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc']) }}">
+                                                Due Date
+                                                <i class="fa {{ request('sort') === 'due_date' ? (request('direction') === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : 'fa-sort' }}"></i>
+                                            </a>
                                         </th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
-                                            Status
+                                            <a href="{{ request()->fullUrlWithQuery(['sort' => 'status', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc']) }}">
+                                                Status
+                                                <i class="fa {{ request('sort') === 'status' ? (request('direction') === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : 'fa-sort' }}"></i>
+                                            </a>
                                         </th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-11 px-3">
                                             Description
                                         </th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-11 px-3">
                                             Action
                                         </th>
                                     </tr>
                                 </thead>
+                                
                                 <tbody>
                                     @php
                                         $number = ($debt->currentPage() - 1) * $debt->perPage() + 1; 
