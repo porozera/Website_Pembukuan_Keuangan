@@ -23,8 +23,8 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\ResetPassword;
-use App\Http\Controllers\ChangePassword;            
-            
+use App\Http\Controllers\ChangePassword;
+use App\Http\Controllers\DebtController;
 
 Route::get('/', function () {return redirect('/dashboard');})->middleware('auth');
 	Route::get('/register', [RegisterController::class, 'create'])->middleware('guest')->name('register');
@@ -37,6 +37,18 @@ Route::get('/', function () {return redirect('/dashboard');})->middleware('auth'
 	Route::post('/change-password', [ChangePassword::class, 'update'])->middleware('guest')->name('change.perform');
 	Route::get('/dashboard', [HomeController::class, 'index'])->name('home')->middleware('auth');
 Route::group(['middleware' => 'auth'], function () {
+
+	// Debt (hutang)
+	Route::get('/debt', [DebtController::class, 'index'])->name('debt');
+	Route::get('/debt/add', [DebtController::class, 'add'])->name('debt.add');
+	Route::post('/debt/add/perform', [DebtController::class, 'create'])->name('debt.add.perform');
+	Route::get('/debt/edit/{id}', [DebtController::class, 'edit'])->name('debt.edit');
+	Route::put('/debt/edit/{id}/perform', [DebtController::class, 'update'])->name('debt.edit.perform');
+	Route::delete('/debt/delete/{id}', [DebtController::class, 'delete'])->name('debt.delete');
+
+
+
+	// NAMBAH ROUTE DIATAS LINE INI AJAAA!!!!
 	Route::get('/virtual-reality', [PageController::class, 'vr'])->name('virtual-reality');
 	Route::get('/rtl', [PageController::class, 'rtl'])->name('rtl');
 	Route::get('/profile', [UserProfileController::class, 'show'])->name('profile');
@@ -44,6 +56,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/profile-static', [PageController::class, 'profile'])->name('profile-static'); 
 	Route::get('/sign-in-static', [PageController::class, 'signin'])->name('sign-in-static');
 	Route::get('/sign-up-static', [PageController::class, 'signup'])->name('sign-up-static'); 
-	Route::get('/{page}', [PageController::class, 'index'])->name('page');
 	Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+
+	Route::get('/{page}', [PageController::class, 'index'])->name('page');
+
 });
