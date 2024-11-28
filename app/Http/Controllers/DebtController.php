@@ -48,10 +48,7 @@ class DebtController extends Controller
 
     public function edit($id)
     {
-        // Fetch the debt record by its ID and pass it to the view
         $debt = Debt::find($id);
-    
-        // Check if the debt exists
         if (!$debt) {
             return redirect('/edit_debt')->with('error', 'Debt not found');
         }
