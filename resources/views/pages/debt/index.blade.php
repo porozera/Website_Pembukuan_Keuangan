@@ -53,6 +53,12 @@
                                             </a>
                                         </th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
+                                            <a href="{{ request()->fullUrlWithQuery(['sort' => 'amount', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc']) }}">
+                                                Total
+                                                <i class="fa {{ request('sort') === 'amount' ? (request('direction') === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : 'fa-sort' }}"></i>
+                                            </a>
+                                        </th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
                                             <a href="{{ request()->fullUrlWithQuery(['sort' => 'status', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc']) }}">
                                                 Status
                                                 <i class="fa {{ request('sort') === 'status' ? (request('direction') === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : 'fa-sort' }}"></i>
@@ -78,15 +84,22 @@
                                         </td>
     
                                         <td class="align-middle text-center text-sm px-3">
-                                            <p class="text-xs font-weight-bold mb-0">{{$item['amount']}}</p>
+                                            <p class="text-xs font-weight-bold mb-0">Rp. {{ number_format($item['amount'], 0, ',', '.')}}</p>
                                         </td>
     
                                         <td class="align-middle text-center text-sm px-3">
-                                            <p class="text-xs font-weight-bold mb-0">{{$item['interest_rate']}}</p>
+                                            <p class="text-xs font-weight-bold mb-0">{{$item['interest_rate']}} %</p>
                                         </td>
     
                                         <td class="align-middle text-center px-3">
                                             <span class="text-secondary text-xs font-weight-bold">{{$item['due_date']}}</span>
+                                        </td>
+
+                                        <td class="align-middle text-center text-sm px-3">
+                                            @php
+                                               $total = $item['amount']+($item['amount']*($item['interest_rate']/100))
+                                            @endphp
+                                            <p class="text-xs font-weight-bold mb-0">Rp. {{ number_format($total, 0, ',', '.') }}</p>
                                         </td>
     
                                         <td class="align-middle text-center px-3">
