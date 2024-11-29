@@ -8,7 +8,7 @@
                     <div class="card">
                         <div class="card-header pb-0">
                             <div class="d-flex align-items-center">
-                                <p class="mb-0">Add Debts</p>
+                                <p class="mb-0"><b>Add Debts</b></p>
                             </div>
                         </div>
                         <div class="card-body">

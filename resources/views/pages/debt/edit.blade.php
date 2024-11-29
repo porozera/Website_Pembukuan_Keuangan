@@ -1,14 +1,14 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
 
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'Debts'])
+    @include('layouts.navbars.auth.topnav', ['title' => 'Edit Debts'])
         <div class="container">
             <div class="row">
                 <div class="col">
                     <div class="card">
                         <div class="card-header pb-0">
                             <div class="d-flex align-items-center">
-                                <p class="mb-0">Add Debts</p>
+                                <p class="mb-0"><b>Edit Debts</b></p>
                             </div>
                         </div>
                         <div class="card-body">
@@ -41,7 +41,7 @@
                                         <div class="form-group">
                                             <label for="statusInput" class="form-control-label">Status</label>
                                             <select class="form-control" name="status">
-                                                <option selected value="{{$debt['amount']}}">{{$debt['status']}}</option>
+                                                <option selected value="{{$debt['status']}}">{{$debt['status']}}</option>
                                                 <option value="Paid">Paid</option>
                                                 <option value="Unpaid">Unpaid</option>
                                             </select>
