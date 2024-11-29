@@ -1,7 +1,7 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
 
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'Debts'])
+    @include('layouts.navbars.auth.topnav', ['title' => 'Products'])
     <div class="container-fluid py-4">
         @if(session('success'))
         <div class="alert alert-success" role="alert" id="successMessage">
@@ -14,11 +14,11 @@
                     <div class="card-header pb-0">
                         <div class="row">
                             <div class="col d-flex justify-content-between align-items-center">
-                                <h6><b>Debts table</b></h6>
+                                <h6><b>Products table</b></h6>
                                 <button class="btn btn-primary btn-sm">
-                                    <a href="/debt/add" class="text-white">
+                                    <a href="/product/add" class="text-white">
                                         <i class="fa fa-plus"></i>
-                                        Add Debts 
+                                        Add Products 
                                     </a>
                                 </button>
                             </div>
@@ -36,33 +36,9 @@
                                             </a>
                                         </th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
-                                            <a href="{{ request()->fullUrlWithQuery(['sort' => 'amount', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc']) }}">
-                                                Amount
-                                                <i class="fa {{ request('sort') === 'amount' ? (request('direction') === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : 'fa-sort' }}"></i>
-                                            </a>
-                                        </th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
-                                            <a href="{{ request()->fullUrlWithQuery(['sort' => 'interest_rate', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc']) }}">
-                                                Interest Rate
-                                                <i class="fa {{ request('sort') === 'interest_rate' ? (request('direction') === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : 'fa-sort' }}"></i>
-                                            </a>
-                                        </th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
-                                            <a href="{{ request()->fullUrlWithQuery(['sort' => 'due_date', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc']) }}">
-                                                Due Date
-                                                <i class="fa {{ request('sort') === 'due_date' ? (request('direction') === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : 'fa-sort' }}"></i>
-                                            </a>
-                                        </th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
-                                            <a href="{{ request()->fullUrlWithQuery(['sort' => 'amount', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc']) }}">
-                                                Total
-                                                <i class="fa {{ request('sort') === 'amount' ? (request('direction') === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : 'fa-sort' }}"></i>
-                                            </a>
-                                        </th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
-                                            <a href="{{ request()->fullUrlWithQuery(['sort' => 'status', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc']) }}">
-                                                Status
-                                                <i class="fa {{ request('sort') === 'status' ? (request('direction') === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : 'fa-sort' }}"></i>
+                                            <a href="{{ request()->fullUrlWithQuery(['sort' => 'name', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc']) }}">
+                                                Name
+                                                <i class="fa {{ request('sort') === 'name' ? (request('direction') === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : 'fa-sort' }}"></i>
                                             </a>
                                         </th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-11 px-3">
@@ -76,42 +52,16 @@
                                 
                                 <tbody>
                                     @php
-                                        $number = ($debt->currentPage() - 1) * $debt->perPage() + 1; 
+                                        $number = ($product->currentPage() - 1) * $product->perPage() + 1; 
                                     @endphp
-                                    @foreach ($debt as $item )
+                                    @foreach ($product as $item )
                                     <tr>
                                         <td class="align-middle text-center text-sm px-3">
                                             <p class="text-xs font-weight-bold mb-0">{{$number++}}</p>
                                         </td>
     
                                         <td class="align-middle text-center text-sm px-3">
-                                            <p class="text-xs font-weight-bold mb-0">Rp. {{ number_format($item['amount'], 0, ',', '.')}}</p>
-                                        </td>
-    
-                                        <td class="align-middle text-center text-sm px-3">
-                                            <p class="text-xs font-weight-bold mb-0">{{$item['interest_rate']}} %</p>
-                                        </td>
-    
-                                        <td class="align-middle text-center px-3">
-                                            <span class="text-secondary text-xs font-weight-bold">{{$item['due_date']}}</span>
-                                        </td>
-
-                                        <td class="align-middle text-center text-sm px-3">
-                                            @php
-                                               $total = $item['amount']+($item['amount']*($item['interest_rate']/100))
-                                            @endphp
-                                            <p class="text-xs font-weight-bold mb-0">Rp. {{ number_format($total, 0, ',', '.') }}</p>
-                                        </td>
-    
-                                        <td class="align-middle text-center px-3">
-                                            @if ($item['status'] == 'Unpaid')
-                                                <span class="badge badge-sm bg-gradient-danger">{{$item['status']}}</span>
-                                            @elseif ($item['status'] == 'Paid')
-                                                <span class="badge badge-sm bg-gradient-success">{{$item['status']}}</span>
-                                            @else
-                                                <span class="badge badge-sm bg-gradient-secondary">No Status</span>
-                                            @endif
-                                            
+                                            <p class="text-xs font-weight-bold mb-0">{{ $item['name']}}</p>
                                         </td>
     
                                         <td class="align-middle text-center text-sm px-3">
@@ -119,11 +69,11 @@
                                         </td>
     
                                         <td class="align-middle text-center text-sm px-3">
-                                            <a href="/debt/edit/{{$item['id']}}" class="text-primary font-weight-bold text-xs me-3"
-                                               data-toggle="tooltip" data-original-title="Edit user">
+                                            <a href="/product/edit/{{$item['id']}}" class="text-primary font-weight-bold text-xs me-3"
+                                               data-toggle="tooltip" data-original-title="Edit">
                                                 <b>Edit</b>
                                             </a>
-                                            <form action="/debt/delete/{{ $item['id'] }}" method="POST" style="display:inline;" id="debtDeleteForm">
+                                            <form action="/product/delete/{{ $item['id'] }}" method="POST" style="display:inline;" id="productDeleteForm">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="button" class="text-danger font-weight-bold text-xs" data-bs-toggle="modal" data-bs-target="#deleteModal" style="border:none;background:none;">
@@ -137,7 +87,7 @@
                                 </tbody>
                             </table>
                             <div class="card-footer">
-                                {{ $debt->links('vendor.pagination.bootstrap-5') }}
+                                {{ $product->links('vendor.pagination.bootstrap-5') }}
                             </div>                            
                     </div>
                 </div>
@@ -174,7 +124,7 @@
             }
         });
         document.getElementById('submitFormButton').addEventListener('click', function () {
-                document.getElementById('debtDeleteForm').submit();
+                document.getElementById('productDeleteForm').submit();
         });
     </script>
 @endsection

@@ -16,7 +16,9 @@ class DebtController extends Controller
             $query->orderBy($request->input('sort'), $request->input('direction'));
         }
     
-        $debt = $query->paginate(4);
+        $sortDirection = request('direction', 'desc'); 
+        $debt = $query->orderBy('created_at', $sortDirection)->paginate(10);
+
     
         return view('pages.debt.index', compact('debt'));
     }
@@ -50,7 +52,7 @@ class DebtController extends Controller
     {
         $debt = Debt::find($id);
         if (!$debt) {
-            return redirect('/edit_debt')->with('error', 'Debt not found');
+            return redirect('/debt')->with('error', 'Debt not found');
         }
     
         return view('pages.debt.edit', compact('debt'));

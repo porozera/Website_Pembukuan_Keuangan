@@ -1,57 +1,32 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
 
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'Add Debts'])
+    @include('layouts.navbars.auth.topnav', ['title' => 'Add Products'])
         <div class="container">
             <div class="row">
                 <div class="col">
                     <div class="card">
                         <div class="card-header pb-0">
                             <div class="d-flex align-items-center">
-                                <p class="mb-0"><b>Add Debts</b></p>
+                                <p class="mb-0"><b>Add Products</b></p>
                             </div>
                         </div>
                         <div class="card-body">
-                            <form role="form" method="POST" action="{{ route('debt.add.perform') }}" enctype="multipart/form-data" id="debtAddForm">
+                            <form role="form" method="POST" action="{{ route('product.add.perform') }}" enctype="multipart/form-data" id="productAddForm">
                                     @csrf
                                     @method('POST')
                                     <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="amountInput" class="form-control-label">Amount</label>
-                                            <input class="form-control" type="number" name="amount" placeholder="Rp.">
-                                            @error('amount') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="interest_rate" class="form-control-label">Interest Rate</label>
-                                            <input class="form-control" type="number" name="interest_rate" placeholder="%">
-                                            @error('interest_rate') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="due_date" class="form-control-label">Due Date</label>
-                                            <input class="form-control" type="date" name="due_date">
-                                            @error('due_date') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="statusInput" class="form-control-label">Status</label>
-                                            <select class="form-control" name="status">
-                                                <option selected>Select Status</option>
-                                                <option value="Paid">Paid</option>
-                                                <option value="Unpaid">Unpaid</option>
-                                            </select>
-                                            @error('status') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
+                                            <label for="amountInput" class="form-control-label">Products Name</label>
+                                            <input class="form-control" type="text" name="name" placeholder="Ex : Kripik Jamur">
+                                            @error('name') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="due_date" class="form-control-label">Description</label>
-                                            <textarea class="form-control" type="text" name="description"></textarea>
+                                            <textarea class="form-control" type="text" name="description" placeholder="Ex : Kripik Jamur berat 900 gram"></textarea>
                                             @error('description') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
                                         </div>
                                     </div>
@@ -94,7 +69,7 @@
         <script>
             document.getElementById('submitFormButton').addEventListener('click', function () {
                 // Submit the form
-                document.getElementById('debtAddForm').submit();
+                document.getElementById('productAddForm').submit();
             });
         </script>
 @endsection

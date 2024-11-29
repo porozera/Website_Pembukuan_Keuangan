@@ -25,6 +25,7 @@ use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\ResetPassword;
 use App\Http\Controllers\ChangePassword;
 use App\Http\Controllers\DebtController;
+use App\Http\Controllers\ProductController;
 
 Route::get('/', function () {return redirect('/dashboard');})->middleware('auth');
 	Route::get('/register', [RegisterController::class, 'create'])->middleware('guest')->name('register');
@@ -46,7 +47,13 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::put('/debt/edit/{id}/perform', [DebtController::class, 'update'])->name('debt.edit.perform');
 	Route::delete('/debt/delete/{id}', [DebtController::class, 'delete'])->name('debt.delete');
 
-
+	// Products
+	Route::get('/product', [ProductController::class, 'index'])->name('product');
+	Route::get('/product/add', [ProductController::class, 'add'])->name('product.add');
+	Route::post('/product/add/perform', [ProductController::class, 'create'])->name('product.add.perform');
+	Route::get('/product/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
+	Route::put('/product/edit/{id}/perform', [ProductController::class, 'update'])->name('product.edit.perform');
+	Route::delete('/product/delete/{id}', [ProductController::class, 'delete'])->name('product.delete');
 
 	// NAMBAH ROUTE DIATAS LINE INI AJAAA!!!!
 	Route::get('/virtual-reality', [PageController::class, 'vr'])->name('virtual-reality');
