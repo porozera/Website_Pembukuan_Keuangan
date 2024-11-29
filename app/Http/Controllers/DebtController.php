@@ -52,7 +52,7 @@ class DebtController extends Controller
     {
         $debt = Debt::find($id);
         if (!$debt) {
-            return redirect('/edit_debt')->with('error', 'Debt not found');
+            return redirect('/debt')->with('error', 'Debt not found');
         }
     
         return view('pages.debt.edit', compact('debt'));
