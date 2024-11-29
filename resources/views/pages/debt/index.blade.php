@@ -14,10 +14,11 @@
                     <div class="card-header pb-0">
                         <div class="row">
                             <div class="col d-flex justify-content-between align-items-center">
-                                <h6>Debts table</h6>
+                                <h6><b>Debts table</b></h6>
                                 <button class="btn btn-primary btn-sm">
                                     <a href="/debt/add" class="text-white">
-                                        Add Debts <i class="fa fa-plus"></i>
+                                        <i class="fa fa-plus"></i>
+                                        Add Debts 
                                     </a>
                                 </button>
                             </div>
@@ -120,13 +121,13 @@
                                         <td class="align-middle text-center text-sm px-3">
                                             <a href="/debt/edit/{{$item['id']}}" class="text-primary font-weight-bold text-xs me-3"
                                                data-toggle="tooltip" data-original-title="Edit user">
-                                                Edit
+                                                <b>Edit</b>
                                             </a>
                                             <form action="/debt/delete/{{ $item['id'] }}" method="POST" style="display:inline;" id="debtDeleteForm">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="button" class="text-danger font-weight-bold text-xs" data-bs-toggle="modal" data-bs-target="#deleteModal" style="border:none;background:none;">
-                                                    Delete
+                                                    <b>Delete</b>
                                                 </button>
                                             </form>
                                         </td>                                        
