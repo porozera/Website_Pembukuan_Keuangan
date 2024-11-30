@@ -73,11 +73,11 @@
                                                data-toggle="tooltip" data-original-title="Edit">
                                                 <b>Edit</b>
                                             </a>
-                                            <form action="/product/delete/{{ $item['id'] }}" method="POST" style="display:inline;" id="productDeleteForm">
+                                            <form action="/product/delete/{{ $item['id'] }}" method="POST" style="display:inline;">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="button" class="text-danger font-weight-bold text-xs" data-bs-toggle="modal" data-bs-target="#deleteModal" style="border:none;background:none;">
-                                                    <b>Delete</b>
+                                                <button type="button" class="text-danger font-weight-bold text-xs" data-bs-toggle="modal" data-bs-target="#deleteModal" style="border:none;background:none;" data-id="{{ $item['id'] }}">
+                                                    <b>Delete {{$item['id']}}</b>
                                                 </button>
                                             </form>
                                         </td>                                        
@@ -123,8 +123,20 @@
                 }, 3000);
             }
         });
+        const deleteButtons = document.querySelectorAll('[data-bs-target="#deleteModal"]');
+        let deleteForm = null;
+
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const id = this.getAttribute('data-id');
+                deleteForm = document.querySelector(`form[action="/product/delete/${id}"]`);
+            });
+        });
+
         document.getElementById('submitFormButton').addEventListener('click', function () {
-                document.getElementById('productDeleteForm').submit();
+            if (deleteForm) {
+                deleteForm.submit();
+            }
         });
     </script>
 @endsection
