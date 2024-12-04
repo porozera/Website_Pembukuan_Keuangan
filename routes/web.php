@@ -26,6 +26,7 @@ use App\Http\Controllers\ResetPassword;
 use App\Http\Controllers\ChangePassword;
 use App\Http\Controllers\DebtController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\KaryawanController;
 
 Route::get('/', function () {return redirect('/dashboard');})->middleware('auth');
 	Route::get('/register', [RegisterController::class, 'create'])->middleware('guest')->name('register');
@@ -54,6 +55,16 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/product/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
 	Route::put('/product/edit/{id}/perform', [ProductController::class, 'update'])->name('product.edit.perform');
 	Route::delete('/product/delete/{id}', [ProductController::class, 'delete'])->name('product.delete');
+
+	// Karyawan
+	Route::get('/karyawan', [KaryawanController::class, 'index'])->name('karyawan.index');
+	Route::get('/karyawan/add', [KaryawanController::class, 'add'])->name('karyawan.add');
+	Route::post('/karyawan', [KaryawanController::class, 'create'])->name('karyawan.create');
+	Route::get('/karyawan/{id}/edit', [KaryawanController::class, 'edit'])->name('karyawan.edit');
+	Route::put('/karyawan/{id}', [KaryawanController::class, 'update'])->name('karyawan.update');
+	Route::delete('/karyawan/{id}', [KaryawanController::class, 'delete'])->name('karyawan.delete');
+
+
 
 	// NAMBAH ROUTE DIATAS LINE INI AJAAA!!!!
 	Route::get('/virtual-reality', [PageController::class, 'vr'])->name('virtual-reality');
