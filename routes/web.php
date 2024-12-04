@@ -57,12 +57,12 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::delete('/product/delete/{id}', [ProductController::class, 'delete'])->name('product.delete');
 
 	// Karyawan
-	Route::get('/karyawan', [KaryawanController::class, 'index'])->name('karyawan.index');
+	Route::get('/karyawan', [KaryawanController::class, 'index'])->name('karyawan');
 	Route::get('/karyawan/add', [KaryawanController::class, 'add'])->name('karyawan.add');
-	Route::post('/karyawan', [KaryawanController::class, 'create'])->name('karyawan.create');
-	Route::get('/karyawan/{id}/edit', [KaryawanController::class, 'edit'])->name('karyawan.edit');
-	Route::put('/karyawan/{id}', [KaryawanController::class, 'update'])->name('karyawan.update');
-	Route::delete('/karyawan/{id}', [KaryawanController::class, 'delete'])->name('karyawan.delete');
+	Route::post('/karyawan/add/perform', [KaryawanController::class, 'create'])->name('karyawan.add.perform');
+	Route::get('/karyawan/edit/{id}', [KaryawanController::class, 'edit'])->name('karyawan.edit');
+	Route::put('/product/edit/{id}/perform', [KaryawanController::class, 'update'])->name('karyawan.edit.perform');
+	Route::delete('/karyawan/delete/{id}', [KaryawanController::class, 'delete'])->name('karyawan.delete');
 
 
 
