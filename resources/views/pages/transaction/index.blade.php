@@ -93,7 +93,7 @@
                                         </td>
     
                                         <td class="align-middle text-center text-sm px-3">
-                                            <p class="text-xs font-weight-bold mb-0">{{$item['amount']}}</p>
+                                            <p class="text-xs font-weight-bold mb-0">Rp. {{ number_format($item['amount'], 0, ',', '.')}}</p>
                                         </td>
 
                                         <td class="align-middle text-center text-sm px-3">

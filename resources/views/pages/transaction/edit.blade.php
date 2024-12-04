@@ -16,29 +16,45 @@
                                     @csrf
                                     @method('PUT')
                                     <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="date" class="form-control-label">Date</label>
-                                            <input class="form-control" type="date" name="date" value="{{$transaction['date']}}">
-                                            @error('date') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="date" class="form-control-label">Date</label>
+                                                <input class="form-control" type="date" name="date" value="{{$transaction['date']}}">
+                                                @error('date') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="transaction_typeInput" class="form-control-label">Transaction Type</label>
+                                                <select class="form-control" name="transaction_type">
+                                                    <option selected value="{{$transaction['transaction_type']}}">{{$transaction['transaction_type']}}</option>
+                                                    <option value="Pemasukan">Pemasukan</option>
+                                                    <option value="Pengeluaran">Pengeluaran</option>
+                                                </select>
+                                                @error('transaction_type') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="transaction_typeInput" class="form-control-label">Transaction Type</label>
-                                            <select class="form-control" name="transaction_type">
-                                                <option selected value="{{$transaction['transaction_type']}}">{{$transaction['transaction_type']}}</option>
-                                                <option value="Pemasukan">Pemasukan</option>
-                                                <option value="Pengeluaran">Pengeluaran</option>
-                                            </select>
-                                            @error('transaction_type') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="amountInput" class="form-control-label">Amount</label>
+                                                <input class="form-control" type="number" name="amount" value="{{$transaction['amount']}}">
+                                                @error('amount') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="amountInput" class="form-control-label">Amount</label>
-                                            <input class="form-control" type="number" name="amount" value="{{$transaction['amount']}}">
-                                            @error('amount') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="categoryInput" class="form-control-label">Category</label>
+                                                <select class="form-control" name="category">
+                                                    <option selected value="{{$transaction['category']}}">{{$transaction['category']}}</option>
+                                                    <option value="Pembelian bahan baku">Pembelian bahan baku</option>
+                                                    <option value="Biaya operasional">Biaya operasional</option>
+                                                    <option value="Penjualan">Penjualan</option>
+                                                    <option value="Pendapatan tambahan">Pendapatan tambahan</option>
+                                                </select>
+                                                @error('status') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
@@ -46,19 +62,6 @@
                                             <label for="due_date" class="form-control-label">Description</label>
                                             <textarea class="form-control" type="text" name="description">{{$transaction['description']}}</textarea>
                                             @error('description') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="categoryInput" class="form-control-label">Category</label>
-                                            <select class="form-control" name="category">
-                                                <option selected value="{{$transaction['category']}}">{{$transaction['category']}}</option>
-                                                <option value="Pembelian bahan baku">Pembelian bahan baku</option>
-                                                <option value="Biaya operasional">Biaya operasional</option>
-                                                <option value="Penjualan">Penjualan</option>
-                                                <option value="Pendapatan tambahan">Pendapatan tambahan</option>
-                                            </select>
-                                            @error('status') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
                                         </div>
                                     </div>
                                     <div class="col-md-10">

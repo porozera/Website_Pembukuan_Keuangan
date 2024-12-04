@@ -16,7 +16,8 @@
                                     @csrf
                                     @method('POST')
                                     <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col">
+                                        <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="due_date" class="form-control-label">Date</label>
@@ -35,10 +36,28 @@
                                                 @error('transaction_type') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label for="amountInput" class="form-control-label">Amount</label>
-                                            <input class="form-control" type="number" name="amount" placeholder="Rp.">
-                                            @error('amount') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="amountInput" class="form-control-label">Amount</label>
+                                                    <input class="form-control" type="number" name="amount" placeholder="Rp.">
+                                                    @error('amount') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="categoryInput" class="form-control-label">Category</label>
+                                                    <select class="form-control" name="category">
+                                                        <option selected>Select Category</option>
+                                                        <option value="Pembelian bahan baku">Pembelian bahan baku</option>
+                                                        <option value="Biaya operasional">Biaya operasional</option>
+                                                        <option value="Penjualan">Penjualan</option>
+                                                        <option value="Pendapatan tambahan">Pendapatan tambahan</option>
+                                                    </select>
+                                                    @error('category') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
@@ -47,24 +66,8 @@
                                                 @error('description') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
                                             </div>
                                         </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="categoryInput" class="form-control-label">Category</label>
-                                            <select class="form-control" name="category">
-                                                <option selected>Select Category</option>
-                                                <option value="Pembelian bahan baku">Pembelian bahan baku</option>
-                                                <option value="Biaya operasional">Biaya operasional</option>
-                                                <option value="Penjualan">Penjualan</option>
-                                                <option value="Pendapatan tambahan">Pendapatan tambahan</option>
-                                            </select>
-                                            @error('category') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-md-10">
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <button type="button" class="btn btn-primary btn-sm w-100" data-bs-toggle="modal" data-bs-target="#addModal">
+                                        <div class="form-group text-end">
+                                            <button type="button" class="btn btn-primary btn-sm w-20" data-bs-toggle="modal" data-bs-target="#addModal">
                                                 Add
                                             </button>
                                         </div>
