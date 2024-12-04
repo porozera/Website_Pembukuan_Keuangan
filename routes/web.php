@@ -26,6 +26,7 @@ use App\Http\Controllers\ResetPassword;
 use App\Http\Controllers\ChangePassword;
 use App\Http\Controllers\DebtController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\HppcalculationController;
 
 Route::get('/', function () {return redirect('/dashboard');})->middleware('auth');
 	Route::get('/register', [RegisterController::class, 'create'])->middleware('guest')->name('register');
@@ -54,6 +55,14 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/product/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
 	Route::put('/product/edit/{id}/perform', [ProductController::class, 'update'])->name('product.edit.perform');
 	Route::delete('/product/delete/{id}', [ProductController::class, 'delete'])->name('product.delete');
+
+	//hpp
+	Route::get('/hpp', [HppcalculationController::class, 'index'])->name('hpp');
+	Route::get('/hpp/add', [HppcalculationController::class, 'add'])->name('hpp.add');
+	Route::post('/hpp/add/perform', [HppcalculationController::class, 'create'])->name('hpp.add.perform');
+	Route::get('/hpp/edit/{id}', [HppcalculationController::class, 'edit'])->name('hpp.edit');
+	Route::put('/hpp/edit/{id}/perform', [HppcalculationController::class, 'update'])->name('hpp.edit.perform');
+	Route::delete('/hpp/delete/{id}', [HppcalculationController::class, 'delete'])->name('hpp.delete');
 
 	// NAMBAH ROUTE DIATAS LINE INI AJAAA!!!!
 	Route::get('/virtual-reality', [PageController::class, 'vr'])->name('virtual-reality');
