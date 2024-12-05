@@ -15,23 +15,28 @@ class Hppcalculation extends Model
     protected $fillable = [
         'initial_stock',
         'final_stock',
-        'purchase_amount',
-        'shipping_cost',
-        'purchase_return',
-        'recommended_price',
-        'purchase_discount',
+        'production_cost',
+        'quantity_produced',
+        'price_per_unit',
         'sales_revenue',
         'sales_return',
         'sales_discount',
         'sales_shipping_cost',
+        'recommended_price',
         'hpp',
         'gross_profit',
         'product_id',
-        'user_id'
+        'user_id',
+
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
     }
 }

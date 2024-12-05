@@ -60,6 +60,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/hpp', [HppcalculationController::class, 'index'])->name('hpp');
 	Route::get('/hpp/add', [HppcalculationController::class, 'add'])->name('hpp.add');
 	Route::post('/hpp/add/perform', [HppcalculationController::class, 'create'])->name('hpp.add.perform');
+	Route::get('/hpp/detail/{id}', [HppcalculationController::class, 'detail'])->name('hpp.detail');
 	Route::get('/hpp/edit/{id}', [HppcalculationController::class, 'edit'])->name('hpp.edit');
 	Route::put('/hpp/edit/{id}/perform', [HppcalculationController::class, 'update'])->name('hpp.edit.perform');
 	Route::delete('/hpp/delete/{id}', [HppcalculationController::class, 'delete'])->name('hpp.delete');
