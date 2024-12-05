@@ -26,33 +26,18 @@
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-0">
-                            <table class="table align-items-center mb-0">
+                            <table class="table align-items-center mb-0" style="table-layout: auto; width: 100%;">
                                 <thead>
                                     <tr>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
-                                            <a href="{{ request()->fullUrlWithQuery(['sort' => 'id', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc']) }}">
-                                                No
-                                                <i class="fa {{ request('sort') === 'id' ? (request('direction') === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : 'fa-sort' }}"></i>
-                                            </a>
-                                        </th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
-                                            Nama
-                                        </th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
-                                            Role
-                                        </th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
-                                            Username
-                                        </th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
-                                            Gaji
-                                        </th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
-                                            Aksi
-                                        </th>
+                                        <th style="width: 5%;" class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">No</th>
+                                        <th style="width: 20%;" class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">Nama</th>
+                                        <th style="width: 15%;" class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">Role</th>
+                                        <th style="width: 15%;" class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">Username</th>
+                                        <th style="width: 20%;" class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">Password</th>
+                                        <th style="width: 15%;" class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">Gaji</th>
+                                        <th style="width: 10%;" class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">Aksi</th>
                                     </tr>
                                 </thead>
-                                
                                 <tbody>
                                     @php
                                         $number = ($karyawan->currentPage() - 1) * $karyawan->perPage() + 1; 
@@ -72,6 +57,22 @@
                                             <p class="text-xs font-weight-bold mb-0">{{ $item['username'] }}</p>
                                         </td>
                                         <td class="align-middle text-center text-sm px-3">
+                                            <div class="password-group">
+                                                <input 
+                                                    type="password" 
+                                                    class="form-control form-control-sm text-xs font-weight-bold mb-0" 
+                                                    value="{{ $item['password'] }}" 
+                                                    id="password-{{ $item['id'] }}" 
+                                                    readonly>
+                                                <button 
+                                                    class="btn btn-sm btn-outline-secondary toggle-password" 
+                                                    type="button" 
+                                                    data-id="{{ $item['id'] }}">
+                                                    <i class="fa fa-eye"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                        <td class="align-middle text-center text-sm px-3">
                                             <p class="text-xs font-weight-bold mb-0">Rp {{ number_format($item['gaji'], 0, ',', '.') }}</p>
                                         </td>
                                         <td class="align-middle text-center text-sm px-3">
@@ -89,7 +90,6 @@
                                         </td>                                        
                                     </tr>
                                     @endforeach
-
                                 </tbody>
                             </table>
                             <div class="card-footer">
@@ -123,15 +123,49 @@
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            // Toggle password visibility
+            document.querySelectorAll('.toggle-password').forEach(button => {
+                button.addEventListener('click', function () {
+                    const passwordInput = document.getElementById('password-' + this.dataset.id);
+                    const icon = this.querySelector('i');
+
+                    if (passwordInput.type === 'password') {
+                        passwordInput.type = 'text';
+                        icon.classList.remove('fa-eye');
+                        icon.classList.add('fa-eye-slash');
+                    } else {
+                        passwordInput.type = 'password';
+                        icon.classList.remove('fa-eye-slash');
+                        icon.classList.add('fa-eye');
+                    }
+                });
+            });
+
+            // Success message timeout
             const successMessage = document.getElementById('successMessage');
             if (successMessage) {
                 setTimeout(() => {
                     successMessage.style.display = 'none';
                 }, 3000);
             }
-        });
-        document.getElementById('submitFormButton').addEventListener('click', function () {
+
+            // Handle delete form submission
+            document.getElementById('submitFormButton').addEventListener('click', function () {
                 document.getElementById('karyawanDeleteForm').submit();
+            });
         });
     </script>
+    <style>
+        .password-group {
+            display: flex;
+            align-items: center;
+        }
+        .password-group input {
+            flex: 1;
+            margin-right: 5px;
+        }
+        .password-group button {
+            padding: 0 8px;
+        }
+    </style>
 @endsection

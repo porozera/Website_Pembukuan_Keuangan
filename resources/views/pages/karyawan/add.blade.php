@@ -1,61 +1,58 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
 
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'Tambah Data Karyawan'])
+    @include('layouts.navbars.auth.topnav', ['title' => 'Tambah Karyawan'])
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-12">
                 <div class="card">
                     <div class="card-header pb-0">
-                        <h6>Tambah Data Karyawan</h6>
+                        <div class="d-flex align-items-center">
+                            <p class="mb-0"><b>Tambah Data Karyawan</b></p>
+                        </div>
                     </div>
                     <div class="card-body">
-                        <form role="form" method="POST" action="{{ route('karyawan.add.perform') }}" enctype="multipart/form-data" id="karyawanAddForm">
+                        <form role="form" method="POST" action="{{ route('karyawan.add.perform') }}" id="karyawanAddForm">
                             @csrf
-                            <div class="form-group">
-                                <label for="name" class="form-label">Nama</label>
-                                <input type="text" name="nama" id="nama" class="form-control" placeholder="Nama Karyawan" required>
-
-
-                            </div>
-                            <div class="form-group">
-                                <label for="role" class="form-label">Role</label>
-                                <select name="role" id="role" class="form-select" required>
-                                    <option value="" disabled selected>Choose Role</option>
-                                    <option value="Admin">Admin</option>
-                                    <option value="Editor">Editor</option>
-                                    <option value="Viewer">Viewer</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="salary" class="form-label">Gaji</label>
-                                <input type="number" name="salary" id="salary" class="form-control" placeholder="Rp" required>
-                            </div>
-                            <div class="form-group my-3">
-                                <button type="button" class="btn btn-secondary" id="generateBtn">Generate Username dan Password</button>
-                                <div id="generatedData" class="mt-2"></div>
-                            </div>
-                            <div class="form-group">
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#confirmationModal">Save</button>
-                                <a href="{{ route('karyawan') }}" class="btn btn-light">Cancel</a>
-                            </div>
-
-                            <!-- Modal Konfirmasi -->
-                            <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="confirmationModalLabel">Konfirmasi</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            Tambah Data Karyawan?
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
-                                            <button type="submit" class="btn btn-primary">Ya</button>
-                                        </div>
+                            @method('POST')
+                            <div class="row">
+                                <!-- Nama -->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="nama" class="form-control-label">Nama</label>
+                                        <input class="form-control" type="text" name="nama" placeholder="Nama Karyawan" value="{{ old('nama') }}">
+                                        @error('nama') <p class="text-danger text-xs pt-1">{{ $message }}</p>@enderror
                                     </div>
+                                </div>
+
+                                <!-- Role -->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="role" class="form-control-label">Role</label>
+                                        <select class="form-control" name="role">
+                                            <option value="" selected disabled>Choose Role</option>
+                                            <option value="Admin">Admin</option>
+                                            <option value="Editor">Editor</option>
+                                            <option value="Viewer">Viewer</option>
+                                        </select>
+                                        @error('role') <p class="text-danger text-xs pt-1">{{ $message }}</p>@enderror
+                                    </div>
+                                </div>
+
+                                <!-- Gaji -->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="gaji" class="form-control-label">Gaji</label>
+                                        <input class="form-control" type="number" step="0.01" name="gaji" placeholder="Rp" value="{{ old('gaji') }}">
+                                        @error('gaji') <p class="text-danger text-xs pt-1">{{ $message }}</p>@enderror
+                                    </div>
+                                </div>
+
+                                <!-- Button -->
+                                <div class="col-md-12 d-flex justify-content-end">
+                                    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addModal">
+                                        Tambah
+                                    </button>
                                 </div>
                             </div>
                         </form>
@@ -65,15 +62,30 @@
         </div>
     </div>
 
+    <!-- Modal Konfirmasi -->
+    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addModalLabel">Konfirmasi</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Apakah Anda yakin ingin menambahkan data ini?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-primary" id="submitFormButton">Ya, Tambahkan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // Generate Username dan Password
-        document.getElementById('generateBtn').addEventListener('click', function () {
-            const username = 'user' + Math.floor(Math.random() * 1000);
-            const password = Math.random().toString(36).slice(-8);
-            document.getElementById('generatedData').innerHTML = `
-                <p>Username: <strong>${username}</strong></p>
-                <p>Password: <strong>${password}</strong></p>
-            `;
+        document.getElementById('submitFormButton').addEventListener('click', function () {
+            document.getElementById('karyawanAddForm').submit();
         });
     </script>
 @endsection
