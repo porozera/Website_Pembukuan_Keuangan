@@ -27,6 +27,9 @@ use App\Http\Controllers\ChangePassword;
 use App\Http\Controllers\DebtController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\KaryawanController;
+use App\Http\Controllers\HppcalculationController;
+use App\Http\Controllers\TransactionController;
+
 
 Route::get('/', function () {return redirect('/dashboard');})->middleware('auth');
 	Route::get('/register', [RegisterController::class, 'create'])->middleware('guest')->name('register');
@@ -64,6 +67,22 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::put('/karyawan/edit/{id}/perform', [KaryawanController::class, 'update'])->name('karyawan.edit.perform');
 	Route::delete('/karyawan/delete/{id}', [KaryawanController::class, 'delete'])->name('karyawan.delete');
 
+	//hpp
+	Route::get('/hpp', [HppcalculationController::class, 'index'])->name('hpp');
+	Route::get('/hpp/add', [HppcalculationController::class, 'add'])->name('hpp.add');
+	Route::post('/hpp/add/perform', [HppcalculationController::class, 'create'])->name('hpp.add.perform');
+	Route::get('/hpp/detail/{id}', [HppcalculationController::class, 'detail'])->name('hpp.detail');
+	Route::get('/hpp/edit/{id}', [HppcalculationController::class, 'edit'])->name('hpp.edit');
+	Route::put('/hpp/edit/{id}/perform', [HppcalculationController::class, 'update'])->name('hpp.edit.perform');
+	Route::delete('/hpp/delete/{id}', [HppcalculationController::class, 'delete'])->name('hpp.delete');
+
+	// Transactions
+	Route::get('/transaction', [TransactionController::class, 'index'])->name('transaction');
+	Route::get('/transaction/add', [TransactionController::class, 'add'])->name('transaction.add');
+	Route::post('/transaction/add/perform', [TransactionController::class, 'create'])->name('transaction.add.perform');
+	Route::get('/transaction/edit/{id}', [TransactionController::class, 'edit'])->name('transaction.edit');
+	Route::put('/transaction/edit/{id}/perform', [TransactionController::class, 'update'])->name('transaction.edit.perform');
+	Route::delete('/transaction/delete/{id}', [TransactionController::class, 'delete'])->name('transaction.delete');
 
 
 	// NAMBAH ROUTE DIATAS LINE INI AJAAA!!!!

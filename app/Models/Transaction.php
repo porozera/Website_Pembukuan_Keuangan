@@ -7,24 +7,22 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class Product extends Model
+class Transaction extends Model
 {
     use HasApiTokens, HasFactory, Notifiable;
-    protected $table = 'products';
+    protected $table = 'transactions';
     public $timestamps = true;
     protected $fillable = [
-        'name',
+        'date',
+        'transaction_type',
+        'amount',
         'description',
+        'category',
         'user_id'
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class);
-    }
-
-    public function product()
-    {
-        return $this->hasMany(Product::class);
     }
 }

@@ -1,7 +1,7 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
 
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'Products'])
+    @include('layouts.navbars.auth.topnav', ['title' => 'HPP Calculation'])
     <div class="container-fluid py-4">
         @if(session('success'))
         <div class="alert alert-success" role="alert" id="successMessage">
@@ -14,11 +14,10 @@
                     <div class="card-header pb-0">
                         <div class="row">
                             <div class="col d-flex justify-content-between align-items-center">
-                                <h6><b>Products table</b></h6>
+                                <h6><b>HPP Calculation table</b></h6>
                                 <button class="btn btn-primary btn-sm">
-                                    <a href="/product/add" class="text-white">
-                                        <i class="fa fa-plus"></i>
-                                        Add Products 
+                                    <a href="/hpp/add" class="text-white">
+                                        Add HPP <i class="fa fa-plus"></i>
                                     </a>
                                 </button>
                             </div>
@@ -36,14 +35,36 @@
                                             </a>
                                         </th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
-                                            <a href="{{ request()->fullUrlWithQuery(['sort' => 'name', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc']) }}">
-                                                Name
-                                                <i class="fa {{ request('sort') === 'name' ? (request('direction') === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : 'fa-sort' }}"></i>
+                                            <a href="{{ request()->fullUrlWithQuery(['sort' => 'id', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc']) }}">
+                                                Product Name
+                                                <i class="fa {{ request('sort') === 'id' ? (request('direction') === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : 'fa-sort' }}"></i>
                                             </a>
                                         </th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-11 px-3">
-                                            Description
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
+                                            <a href="{{ request()->fullUrlWithQuery(['sort' => 'hpp', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc']) }}">
+                                                HPP
+                                                <i class="fa {{ request('sort') === 'hpp' ? (request('direction') === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : 'fa-sort' }}"></i>
+                                            </a>
                                         </th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
+                                            <a href="{{ request()->fullUrlWithQuery(['sort' => 'gross_profit', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc']) }}">
+                                                Gross Profit
+                                                <i class="fa {{ request('sort') === 'gross_profit' ? (request('direction') === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : 'fa-sort' }}"></i>
+                                            </a>
+                                        </th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
+                                            <a href="{{ request()->fullUrlWithQuery(['sort' => 'recommended_price', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc']) }}">
+                                                Recommended Price
+                                                <i class="fa {{ request('sort') === 'recommended_price' ? (request('direction') === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : 'fa-sort' }}"></i>
+                                            </a>
+                                        </th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
+                                            <a href="{{ request()->fullUrlWithQuery(['sort' => 'created_at', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc']) }}">
+                                                Created at
+                                                <i class="fa {{ request('sort') === 'created_at' ? (request('direction') === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : 'fa-sort' }}"></i>
+                                            </a>
+                                        </th>
+                                    
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-11 px-3">
                                             Action
                                         </th>
@@ -52,32 +73,43 @@
                                 
                                 <tbody>
                                     @php
-                                        $number = ($product->currentPage() - 1) * $product->perPage() + 1; 
+                                        $number = ($hpp->currentPage() - 1) * $hpp->perPage() + 1; 
                                     @endphp
-                                    @foreach ($product as $item )
-                                    <tr>
+                                    @foreach ($hpp as $item )
+                                    <tr> 
                                         <td class="align-middle text-center text-sm px-3">
                                             <p class="text-xs font-weight-bold mb-0">{{$number++}}</p>
                                         </td>
-    
                                         <td class="align-middle text-center text-sm px-3">
-                                            <p class="text-xs font-weight-bold mb-0">{{ $item['name']}}</p>
+                                            <p class="text-xs font-weight-bold mb-0">{{$item->product->name}}</p>
                                         </td>
     
                                         <td class="align-middle text-center text-sm px-3">
-                                            <p class="text-xs font-weight-bold mb-0">{{$item['description']}}</p>
+                                            <p class="text-xs font-weight-bold mb-0">{{$item->hpp}}</p>
+                                        </td>
+    
+                                        <td class="align-middle text-center px-3">
+                                            <span class="text-secondary text-xs font-weight-bold">{{$item->gross_profit}}</span>
+                                        </td>
+
+                                        <td class="align-middle text-center px-3">
+                                            <span class="text-secondary text-xs font-weight-bold">{{$item->recommended_price}}</span>
+                                        </td>
+
+                                        <td class="align-middle text-center text-sm px-3">
+                                            <p class="text-xs font-weight-bold mb-0">{{ $item->created_at->format('d-m-Y') }}</p>
                                         </td>
     
                                         <td class="align-middle text-center text-sm px-3">
-                                            <a href="/product/edit/{{$item['id']}}" class="text-primary font-weight-bold text-xs me-3"
-                                               data-toggle="tooltip" data-original-title="Edit">
-                                                <b>Edit</b>
+                                            <a href="/hpp/detail/{{$item['id']}}" class="text-primary font-weight-bold text-xs me-3"
+                                               data-toggle="tooltip" data-original-title="Edit user">
+                                                Detail
                                             </a>
-                                            <form action="/product/delete/{{ $item['id'] }}" method="POST" style="display:inline;">
+                                            <form action="/hpp/delete/{{ $item['id'] }}" method="POST" style="display:inline;" id="debtDeleteForm">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="button" class="text-danger font-weight-bold text-xs" data-bs-toggle="modal" data-bs-target="#deleteModal" style="border:none;background:none;" data-id="{{ $item['id'] }}">
-                                                    <b>Delete {{$item['id']}}</b>
+                                                    Delete
                                                 </button>
                                             </form>
                                         </td>                                        
@@ -87,7 +119,7 @@
                                 </tbody>
                             </table>
                             <div class="card-footer">
-                                {{ $product->links('vendor.pagination.bootstrap-5') }}
+                                {{ $hpp->links('vendor.pagination.bootstrap-5') }}
                             </div>                            
                     </div>
                 </div>
@@ -129,7 +161,7 @@
         deleteButtons.forEach(button => {
             button.addEventListener('click', function () {
                 const id = this.getAttribute('data-id');
-                deleteForm = document.querySelector(`form[action="/product/delete/${id}"]`);
+                deleteForm = document.querySelector(`form[action="/hpp/delete/${id}"]`);
             });
         });
 
