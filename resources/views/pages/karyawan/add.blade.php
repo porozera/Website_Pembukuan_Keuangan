@@ -19,9 +19,9 @@
                                 <!-- Nama -->
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="nama" class="form-control-label">Nama</label>
-                                        <input class="form-control" type="text" name="nama" placeholder="Nama Karyawan" value="{{ old('nama') }}">
-                                        @error('nama') <p class="text-danger text-xs pt-1">{{ $message }}</p>@enderror
+                                        <label for="username" class="form-control-label">Name</label>
+                                        <input class="form-control" type="text" name="username" placeholder="username" value="{{ old('username') }}">
+                                        @error('username') <p class="text-danger text-xs pt-1">{{ $message }}</p>@enderror
                                     </div>
                                 </div>
 
@@ -31,9 +31,9 @@
                                         <label for="role" class="form-control-label">Role</label>
                                         <select class="form-control" name="role">
                                             <option value="" selected disabled>Choose Role</option>
-                                            <option value="Admin">Admin</option>
-                                            <option value="Editor">Editor</option>
-                                            <option value="Viewer">Viewer</option>
+                                            <option value="admin">Admin</option>
+                                            <option value="editor">Editor</option>
+                                            <option value="viewer">Viewer</option>
                                         </select>
                                         @error('role') <p class="text-danger text-xs pt-1">{{ $message }}</p>@enderror
                                     </div>

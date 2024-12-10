@@ -12,13 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('karyawan', function (Blueprint $table) {
-            $table->id(); // Kolom ID primary key
-            $table->string('nama');
+            $table->id(); 
+            $table->string('username');
             $table->string('role');
-            $table->string('username')->unique();
+            $table->string('email')->unique();
             $table->string('password');
             $table->decimal('gaji', 15, 2);
-            $table->timestamps(); // Kolom created_at dan updated_at
+            $table->timestamps(); 
         });
     }
 

@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Karyawan;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
+
 
 class KaryawanController extends Controller
 {
@@ -32,30 +35,37 @@ class KaryawanController extends Controller
     {
         // Validasi data input
         $attributes = $request->validate([
-            'nama' => 'required|string|max:255',
+            'username' => 'required|string|max:255',
             'role' => 'required|string',
             'gaji' => 'required|numeric|min:0',
         ]);
     
-        // Generate username (nama + angka random)
-        $username = Str::slug($attributes['nama'], '') . rand(100, 999);
+        // Generate email (nama + angka random)
+        $email = Str::slug($attributes['username'], '') . rand(100, 999).'@gmail.com';
     
         // Generate password (acak 8 karakter)
         $password = Str::random(8);
     
         // Simpan ke database
         Karyawan::create([
-            'nama' => $attributes['nama'],
+            'username' => $attributes['username'],
             'role' => $attributes['role'],
-            'username' => $username,
+            'email' => $email,
             'password' => $password,
             'gaji' => $attributes['gaji'],
+        ]);
+
+        User::create([
+            'username' => $attributes['username'],
+            'email' => $email,
+            'password' => $password,
+            'role' => $attributes['role'],
         ]);
     
         // Redirect ke halaman karyawan dengan notifikasi
         return redirect()->route('karyawan')->with(
             'success',
-            'Data Karyawan berhasil ditambahkan! Username: ' . $username . ', Password: ' . $password
+            'Data Karyawan berhasil ditambahkan! Username: ' . $attributes['username'] . ', Password: ' . $password
         );
     }
 
@@ -71,30 +81,57 @@ class KaryawanController extends Controller
 
     public function update($id, Request $request)
     {
+        $karyawan = Karyawan::findOrFail($id);
+
         $attributes = $request->validate([
-            'nama' => 'required',
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('users', 'email')->ignore($karyawan->email, 'email'),
+            ],
             'role' => 'required',
             'username' => 'required',
             'password' => 'nullable',
             'gaji' => 'required|numeric',
         ]);
     
-        $karyawan = Karyawan::findOrFail($id);
+    
+        $oldEmail = $karyawan->email;
     
         $karyawan->update([
-            'nama' => $attributes['nama'],
+            'email' => $attributes['email'],
             'role' => $attributes['role'],
             'username' => $attributes['username'],
             'password' => $attributes['password'] ?: $karyawan->password,
             'gaji' => $attributes['gaji'],
         ]);
     
+        $user = User::where('email', $oldEmail)->first();
+    
+        if ($user) {
+            $user->update([
+                'email' => $attributes['email'],
+                'role' => $attributes['role'],
+                'username' => $attributes['username'],
+                'password' => $attributes['password'] ? bcrypt($attributes['password']) : $user->password,
+            ]);
+        }
+    
         return redirect()->route('karyawan')->with('success', 'Data Karyawan updated successfully!');
     }
 
     public function delete($id)
     {
-        Karyawan::where('id', $id)->delete();
+
+        $karyawan = Karyawan::findOrFail($id);
+    
+
+        User::where('email', $karyawan->email)->delete();
+    
+
+        $karyawan->delete();
+    
         return redirect('/karyawan')->with('success', 'Data Karyawan deleted successfully!');
     }
+    
 }

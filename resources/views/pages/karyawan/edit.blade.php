@@ -18,9 +18,9 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="nameInput" class="form-control-label">Nama Karyawan</label>
-                                        <input class="form-control" type="text" name="nama" placeholder="Ex: Jennifer Roxane" value="{{ $karyawan['nama'] }}">
-                                        @error('nama') 
+                                        <label for="emailInput" class="form-control-label">Email</label>
+                                        <input class="form-control" type="text" name="email" placeholder="Ex: Jennifer Roxane" value="{{ $karyawan['email'] }}">
+                                        @error('email') 
                                             <p class="text-danger text-xs pt-1"> {{$message}} </p>
                                         @enderror
                                     </div>
@@ -34,6 +34,8 @@
                                         @enderror
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="usernameInput" class="form-control-label">Username</label>
@@ -52,6 +54,8 @@
                                         @enderror
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="salaryInput" class="form-control-label">Gaji</label>
@@ -61,7 +65,9 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-md-2">
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 d-flex justify-content-end">
                                     <div class="form-group">
                                         <button type="button" class="btn btn-primary btn-sm w-100" data-bs-toggle="modal" data-bs-target="#editModal">
                                             Update

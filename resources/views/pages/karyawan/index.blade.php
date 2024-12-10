@@ -48,13 +48,13 @@
                                             <p class="text-xs font-weight-bold mb-0">{{$number++}}</p>
                                         </td>
                                         <td class="align-middle text-center text-sm px-3">
-                                            <p class="text-xs font-weight-bold mb-0">{{ $item['nama'] }}</p>
+                                            <p class="text-xs font-weight-bold mb-0">{{ $item['username'] }}</p>
                                         </td>
                                         <td class="align-middle text-center text-sm px-3">
                                             <p class="text-xs font-weight-bold mb-0">{{ $item['role'] }}</p>
                                         </td>
                                         <td class="align-middle text-center text-sm px-3">
-                                            <p class="text-xs font-weight-bold mb-0">{{ $item['username'] }}</p>
+                                            <p class="text-xs font-weight-bold mb-0">{{ $item['email'] }}</p>
                                         </td>
                                         <td class="align-middle text-center text-sm px-3">
                                             <div class="password-group">
@@ -83,7 +83,7 @@
                                             <form action="/karyawan/delete/{{ $item['id'] }}" method="POST" style="display:inline;" id="karyawanDeleteForm">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="button" class="text-danger font-weight-bold text-xs" data-bs-toggle="modal" data-bs-target="#deleteModal" style="border:none;background:none;">
+                                                <button type="button" class="text-danger font-weight-bold text-xs" data-bs-toggle="modal" data-bs-target="#deleteModal" style="border:none;background:none;" data-id="{{ $item['id'] }}">
                                                     <b>Delete</b>
                                                 </button>
                                             </form>
@@ -148,11 +148,21 @@
                     successMessage.style.display = 'none';
                 }, 3000);
             }
+        });
+        const deleteButtons = document.querySelectorAll('[data-bs-target="#deleteModal"]');
+        let deleteForm = null;
 
-            // Handle delete form submission
-            document.getElementById('submitFormButton').addEventListener('click', function () {
-                document.getElementById('karyawanDeleteForm').submit();
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const id = this.getAttribute('data-id');
+                deleteForm = document.querySelector(`form[action="/karyawan/delete/${id}"]`);
             });
+        });
+
+        document.getElementById('submitFormButton').addEventListener('click', function () {
+            if (deleteForm) {
+                deleteForm.submit();
+            }
         });
     </script>
     <style>
