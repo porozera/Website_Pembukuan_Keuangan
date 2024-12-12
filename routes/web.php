@@ -29,6 +29,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\HppcalculationController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\ReceivableController;
 
 
 Route::get('/', function () {return redirect('/dashboard');})->middleware('auth');
@@ -50,6 +51,14 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/debt/edit/{id}', [DebtController::class, 'edit'])->name('debt.edit');
 	Route::put('/debt/edit/{id}/perform', [DebtController::class, 'update'])->name('debt.edit.perform');
 	Route::delete('/debt/delete/{id}', [DebtController::class, 'delete'])->name('debt.delete');
+
+	// Receivable (piutang)
+	Route::get('/receivable', [ReceivableController::class, 'index'])->name('receivable');
+	Route::get('/receivable/add', [ReceivableController::class, 'add'])->name('receivable.add');
+	Route::post('/receivable/add/perform', [ReceivableController::class, 'create'])->name('receivable.add.perform');
+	Route::get('/receivable/edit/{id}', [ReceivableController::class, 'edit'])->name('receivable.edit');
+	Route::put('/receivable/edit/{id}/perform', [ReceivableController::class, 'update'])->name('receivable.edit.perform');
+	Route::delete('/receivable/delete/{id}', [ReceivableController::class, 'delete'])->name('receivable.delete');
 
 	// Products
 	Route::get('/product', [ProductController::class, 'index'])->name('product');
