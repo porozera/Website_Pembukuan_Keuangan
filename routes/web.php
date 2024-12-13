@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -83,6 +84,14 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/transaction/edit/{id}', [TransactionController::class, 'edit'])->name('transaction.edit');
 	Route::put('/transaction/edit/{id}/perform', [TransactionController::class, 'update'])->name('transaction.edit.perform');
 	Route::delete('/transaction/delete/{id}', [TransactionController::class, 'delete'])->name('transaction.delete');
+
+	// Account
+	Route::get('/account', [AccountController::class, 'index'])->name('account');
+	Route::get('/account/add', [AccountController::class, 'add'])->name('account.add');
+	Route::post('/account/add/perform', [AccountController::class, 'create'])->name('account.add.perform');
+	Route::get('/account/edit/{id}', [AccountController::class, 'edit'])->name('account.edit');
+	Route::put('/account/edit/{id}/perform', [AccountController::class, 'update'])->name('account.edit.perform');
+	Route::delete('/account/delete/{id}', [AccountController::class, 'delete'])->name('account.delete');
 
 
 	// NAMBAH ROUTE DIATAS LINE INI AJAAA!!!!

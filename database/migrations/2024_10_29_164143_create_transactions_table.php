@@ -11,20 +11,21 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('debts', function (Blueprint $table) {
+        Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
 
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('transaction_id')->constrained()->onDelete('cascade');
-            $table ->integer('invoice');
-            $table ->decimal('amount', 15, 2);
-            $table ->decimal('paid_amount', 15, 2)->default(0);
-            $table ->decimal('rest_amount', 15, 2);
             $table ->date('date');
-            $table ->date('due_date')->nullable();
-            $table ->string('status');
+            $table ->string('transaction_type');
+            $table ->string('debit');
+            $table ->string('credit');
+            $table ->decimal('amount', 15, 2);
             $table ->text('description');
+            $table ->string('contact')->nullable();
+            $table ->decimal('tax')->nullable();
+            $table ->date('due_date')->nullable();
+            $table ->decimal('interest_rate')->nullable();
         });
     }
 
@@ -33,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('debts');
+        Schema::dropIfExists('transactions');
     }
 };

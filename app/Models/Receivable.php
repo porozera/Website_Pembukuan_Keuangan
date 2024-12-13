@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class Transaction extends Model
+class Receivable extends Model
 {
     use HasApiTokens, HasFactory, Notifiable;
-    protected $table = 'transactions';
+    protected $table = 'receivables';
     public $timestamps = true;
     protected $fillable = [
         'user_id',
@@ -19,6 +19,7 @@ class Transaction extends Model
         'amount',
         'paid_amount',
         'rest_amount',
+        'interest_rate',
         'date',
         'due_date',
         'status',

@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('debts', function (Blueprint $table) {
+        Schema::create('receivables', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
 
@@ -21,6 +21,7 @@ return new class extends Migration
             $table ->decimal('amount', 15, 2);
             $table ->decimal('paid_amount', 15, 2)->default(0);
             $table ->decimal('rest_amount', 15, 2);
+            $table ->decimal('interest_rate', 15, 2)->nullable();
             $table ->date('date');
             $table ->date('due_date')->nullable();
             $table ->string('status');
@@ -33,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('debts');
+        Schema::dropIfExists('receivable');
     }
 };
