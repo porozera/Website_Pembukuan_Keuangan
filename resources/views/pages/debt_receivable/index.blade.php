@@ -137,12 +137,10 @@
                                         </td>
 
                                         <td class="align-middle text-center px-3">
-                                            @if ($item['status'] == 'Pending')
+                                            @if ($item['status'] == 'Belum Lunas')
                                                 <span class="badge badge-sm bg-gradient-warning">{{$item['status']}}</span>
-                                            @elseif ($item['status'] == 'Paid')
+                                            @elseif ($item['status'] == 'Lunas')
                                                 <span class="badge badge-sm bg-gradient-success">{{$item['status']}}</span>
-                                            @elseif ($item['status'] == 'UnPaid')
-                                                <span class="badge badge-sm bg-gradient-danger">{{$item['status']}}</span>
                                             @else
                                                 <span class="badge badge-sm bg-gradient-secondary">No Status</span>
                                             @endif

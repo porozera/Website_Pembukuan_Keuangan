@@ -50,7 +50,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/debt_receivable/add', [Debts_ReceivablesController::class, 'add'])->name('debt_receivable.add');
 	Route::post('/debt_receivable/add/perform', [Debts_ReceivablesController::class, 'create'])->name('debt_receivable.add.perform');
 	Route::get('/debt_receivable/edit/{id}', [Debts_ReceivablesController::class, 'edit'])->name('debt_receivable.edit');
-	Route::put('/debt_receivable/edit/{id}/perform', [Debts_ReceivablesController::class, 'update'])->name('debt_receivable.edit.perform');
+	Route::post('/debt_receivable/{id}/payment', [Debts_ReceivablesController::class, 'payment'])->name('debt_receivable.payment');
 	Route::delete('/debt_receivable/delete/{id}', [Debts_ReceivablesController::class, 'delete'])->name('debt_receivable.delete');
 
 	// Products
