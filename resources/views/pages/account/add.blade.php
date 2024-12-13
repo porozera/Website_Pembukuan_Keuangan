@@ -62,14 +62,14 @@
                                                 <select class="form-control" name="account_type">
                                                     <option selected>Pilih Tipe Akun</option>
                                                     <option value="Debit">Debit</option>
-                                                    <option value="Kredit">Kredit</option>
+                                                    <option value="Credit">Credit</option>
                                                 </select>
                                                 @error('account_type') <p class="text-danger text-xs pt-1">{{$message}}</p> @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="due_date" class="form-control-label">Description</label>
+                                                <label for="description" class="form-control-label">Description</label>
                                                 <textarea class="form-control" type="text" name="description" placeholder=""></textarea>
                                                 @error('description') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
                                             </div>

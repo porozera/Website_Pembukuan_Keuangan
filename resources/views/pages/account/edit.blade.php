@@ -62,7 +62,7 @@
                                                 <select class="form-control" name="account_type">
                                                     <option selected>{{$account['account_type']}}</option>
                                                     <option value="Debit">Debit</option>
-                                                    <option value="Kredit">Kredit</option>
+                                                    <option value="Credit">Credit</option>
                                                 </select>
                                                 @error('account_type') <p class="text-danger text-xs pt-1">{{$message}}</p> @enderror
                                             </div>

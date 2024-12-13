@@ -14,25 +14,20 @@ class Transaction extends Model
     public $timestamps = true;
     protected $fillable = [
         'user_id',
-        'transaction_id',
-        'invoice',
-        'amount',
-        'paid_amount',
-        'rest_amount',
         'date',
+        'transaction_type',
+        'debit',
+        'credit',
+        'amount',
+        'description',
+        'contact',
+        'tax',
         'due_date',
-        'status',
-        'description'
-        
+        'interest_rate'
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class);
-    }
-
-    public function transaction()
-    {
-        return $this->belongsTo(Transaction::class);
     }
 }

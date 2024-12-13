@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Account;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 
@@ -17,12 +18,14 @@ class TransactionController extends Controller
         }
 
         $transaction = $query->paginate(4);
+        $account = Account::all();
 
-        return view('pages.transaction.index', compact('transaction'));
+        return view('pages.transaction.index', compact('transaction','account'));
     }
 
     public function add(){
-        return view('pages.transaction.add');
+        $account = Account::all();
+        return view('pages.transaction.add',  compact('account'));
     }
 
     public function create(Request $request){
