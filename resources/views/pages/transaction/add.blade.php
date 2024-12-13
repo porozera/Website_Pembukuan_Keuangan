@@ -133,7 +133,7 @@
                             <!-- Submit Button -->
                             <div class="form-group text-end">
                                 <button type="button" class="btn btn-primary btn-sm w-20" data-bs-toggle="modal" data-bs-target="#addModal">
-                                    Add
+                                    Tambah
                                 </button>
                             </div>
                         </form>
@@ -152,7 +152,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    Are you sure to add this data?
+                    Apakah anda yakin menambah data ini?
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -226,7 +226,7 @@
                 if (accounts[type]) {
                     accounts[type].forEach(account => {
                         const option = document.createElement('option');
-                        option.value = account.id;
+                        option.value = `${account.name} (${account.code})`;
                         option.textContent = `${account.name} (${account.code})`;
                         selectElement.appendChild(option);
                     });

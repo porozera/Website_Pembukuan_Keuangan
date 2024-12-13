@@ -16,13 +16,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // DB::table('users')->insert([
-        //     'username' => 'admin',
-        //     'firstname' => 'Admin',
-        //     'lastname' => 'Admin',
-        //     'email' => 'admin@argon.com',
-        //     'password' => bcrypt('secret')
-        // ]);
+        DB::table('users')->insert([
+            'username' => 'admin',
+            'firstname' => 'Admin',
+            'lastname' => 'Admin',
+            'email' => 'admin@argon.com',
+            'password' => bcrypt('secret')
+        ]);
                 // Data accounts
         $accounts = [
             ['code' => '1-10001', 'name' => 'Kas', 'category' => 'Kas & Bank', 'account_type' => 'Debit', 'description' => null],

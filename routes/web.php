@@ -26,6 +26,7 @@ use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\ResetPassword;
 use App\Http\Controllers\ChangePassword;
 use App\Http\Controllers\DebtController;
+use App\Http\Controllers\Debts_ReceivablesController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\HppcalculationController;
@@ -45,12 +46,12 @@ Route::get('/', function () {return redirect('/dashboard');})->middleware('auth'
 Route::group(['middleware' => 'auth'], function () {
 
 	// Debt (hutang)
-	Route::get('/debt', [DebtController::class, 'index'])->name('debt');
-	Route::get('/debt/add', [DebtController::class, 'add'])->name('debt.add');
-	Route::post('/debt/add/perform', [DebtController::class, 'create'])->name('debt.add.perform');
-	Route::get('/debt/edit/{id}', [DebtController::class, 'edit'])->name('debt.edit');
-	Route::put('/debt/edit/{id}/perform', [DebtController::class, 'update'])->name('debt.edit.perform');
-	Route::delete('/debt/delete/{id}', [DebtController::class, 'delete'])->name('debt.delete');
+	Route::get('/debt_receivable', [Debts_ReceivablesController::class, 'index'])->name('debt_receivable');
+	Route::get('/debt_receivable/add', [Debts_ReceivablesController::class, 'add'])->name('debt_receivable.add');
+	Route::post('/debt_receivable/add/perform', [Debts_ReceivablesController::class, 'create'])->name('debt_receivable.add.perform');
+	Route::get('/debt_receivable/edit/{id}', [Debts_ReceivablesController::class, 'edit'])->name('debt_receivable.edit');
+	Route::put('/debt_receivable/edit/{id}/perform', [Debts_ReceivablesController::class, 'update'])->name('debt_receivable.edit.perform');
+	Route::delete('/debt_receivable/delete/{id}', [Debts_ReceivablesController::class, 'delete'])->name('debt_receivable.delete');
 
 	// Products
 	Route::get('/product', [ProductController::class, 'index'])->name('product');

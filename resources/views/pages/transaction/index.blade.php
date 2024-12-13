@@ -1,7 +1,7 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
 
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'Transaction'])
+    @include('layouts.navbars.auth.topnav', ['title' => 'Transaksi'])
     <div class="container-fluid py-4">
         @if(session('success'))
         <div class="alert alert-success" role="alert" id="successMessage">
@@ -14,10 +14,10 @@
                     <div class="card-header pb-0">
                         <div class="row">
                             <div class="col d-flex justify-content-between align-items-center">
-                                <h6>Transaction table</h6>
+                                <h6>Tabel Transaksi</h6>
                                 <button class="btn btn-primary btn-sm">
                                     <a href="/transaction/add" class="text-white">
-                                        Add Transaction <i class="fa fa-plus"></i>
+                                        Tambah Transaksi <i class="fa fa-plus"></i>
                                     </a>
                                 </button>
                             </div>
@@ -76,14 +76,7 @@
                                         </td>
 
                                         <td class="align-middle text-center px-3">
-                                            @if ($item['transaction_type'] == 'Pengeluaran')
-                                                <span class="text-xs font-weight-bold mb-0">{{$item['transaction_type']}}</span>
-                                            @elseif ($item['transaction_type'] == 'Pemasukan')
-                                                <span class="text-xs font-weight-bold mb-0">{{$item['transaction_type']}}</span>
-                                            @else
-                                                <span class="text-xs font-weight-bold mb-0">No Status</span>
-                                            @endif
-                                            
+                                            <span class="text-secondary text-xs font-weight-bold">{{$item['transaction_type']}}</span>
                                         </td>
 
                                         <td class="align-middle text-center text-sm px-3">
@@ -102,7 +95,7 @@
                                             <form action="/transaction/delete/{{ $item['id'] }}" method="POST" style="display:inline;" id="transactionDeleteForm">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="button" class="text-danger font-weight-bold text-xs" data-bs-toggle="modal" data-bs-target="#deleteModal" style="border:none;background:none;">
+                                                <button type="button" class="text-danger font-weight-bold text-xs" data-bs-toggle="modal" data-bs-target="#deleteModal" style="border:none;background:none;" data-id="{{ $item['id'] }}">
                                                     Delete
                                                 </button>
                                             </form>
@@ -149,8 +142,20 @@
                 }, 3000);
             }
         });
+        const deleteButtons = document.querySelectorAll('[data-bs-target="#deleteModal"]');
+        let deleteForm = null;
+
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const id = this.getAttribute('data-id');
+                deleteForm = document.querySelector(`form[action="/transaction/delete/${id}"]`);
+            });
+        });
+
         document.getElementById('submitFormButton').addEventListener('click', function () {
-                document.getElementById('transactionDeleteForm').submit();
+            if (deleteForm) {
+                deleteForm.submit();
+            }
         });
     </script>
 @endsection

@@ -24,7 +24,8 @@ class Debts_Receivables extends Model
         'status',
         'description',
         'transaction_id',
-        'user_id'
+        'user_id',
+        'contact'
     ];
 
     public function user()
