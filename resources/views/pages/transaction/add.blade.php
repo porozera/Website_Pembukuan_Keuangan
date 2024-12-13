@@ -97,7 +97,7 @@
                                     <div class="row">
                                         <div class="form-group">
                                             <label for="contact" class="form-control-label">Kontak (Opsional)</label>
-                                            <input class="form-control" type="text" name="contact" placeholder="Catatan">
+                                            <input class="form-control" type="text" name="contact" placeholder="Perusahaan yang terlibat">
                                             @error('contact') <p class="text-danger text-xs pt-1">{{$message}}</p> @enderror
                                         </div>
                                     </div>

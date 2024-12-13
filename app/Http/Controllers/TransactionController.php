@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Account;
+use App\Models\Debts_Receivables;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 
@@ -32,18 +33,64 @@ class TransactionController extends Controller
         $attributes = $request->validate([
             'date' => 'required',
             'transaction_type' => 'required',
+            'debit' => 'required',
+            'credit' => 'required',
             'amount' => 'required',
             'description' => 'required',
-            'category' => 'required',
         ]);
-        $data = Transaction::create([
+
+        $bunga = $attributes['amount'] * ( $request->input('interest_rate', 0) / 100);
+        $pajak = $attributes['amount']* ($request->input('tax', 0) / 100);
+        $total = $attributes['amount'] + $bunga + $pajak;
+
+        $transaction = Transaction::create([
             "date" => $attributes['date'],
             "transaction_type" => $attributes['transaction_type'],
-            "amount" => $attributes['amount'],
+            "debit" => $attributes['debit'],
+            "credit" => $attributes['credit'],
+            "amount" => $total,
             "description" => $attributes['description'],
-            "category" => $attributes['category'],
             "user_id" => auth()->id(),
+
+            "contact" => $request->input('contact', null),
+            "tax" => $request->input('tax', null),
+            "due_date" => $request->input('due_date', null),
+            "interest_rate" => $request->input('interest_rate', null),
         ]);
+
+        if($attributes['transaction_type'] == 'Hutang' or $attributes['transaction_type'] == 'Pengeluaran Sebagai Hutang' ){
+            $invoice = now()->format('Ymd') . rand(1000, 9999);
+            $debts = Debts_Receivables::create([
+                'invoice' => $invoice,
+                'type' => 'Hutang',
+                'amount' => $total,
+                'paid_amount' => 0,
+                'rest_amount' => $total,
+                "interest_rate" => $request->input('interest_rate', null),
+                "date" => $attributes['date'],
+                "due_date" => $request->input('due_date', $attributes['date']),
+                "status" => 'Pending',
+                "description" => $attributes['description'],
+                "user_id" => auth()->id(),
+                "transaction_id"  => $transaction->id,
+            ]);
+        } elseif ($attributes['transaction_type'] == 'Piutang' or $attributes['transaction_type'] == 'Pemasukan Sebagai Piutang'){
+            $invoice = now()->format('Ymd') . rand(10, 99);
+            $debts = Debts_Receivables::create([
+                'invoice' => $invoice,
+                'type' => 'Piutang',
+                'amount' => $total,
+                'paid_amount' => 0,
+                'rest_amount' => $total,
+                "interest_rate" => $request->input('interest_rate', null),
+                "date" => $attributes['date'],
+                "due_date" => $request->input('due_date', $attributes['date']),
+                "status" => 'Pending',
+                "description" => $attributes['description'],
+                "user_id" => auth()->id(),
+                "transaction_id"  => $transaction->id,
+            ]);
+        }
         return redirect("/transaction")->with('success', 'Transaction created successfully!');;
     }
 

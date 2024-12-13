@@ -36,31 +36,25 @@
                                         </th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
                                             <a href="{{ request()->fullUrlWithQuery(['sort' => 'date', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc']) }}">
-                                                Date
+                                                Tanggal
                                                 <i class="fa {{ request('sort') === 'date' ? (request('direction') === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : 'fa-sort' }}"></i>
                                             </a>
                                         </th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
                                             <a href="{{ request()->fullUrlWithQuery(['sort' => 'transaction_type', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc']) }}">
-                                                Transaction Type
+                                                Tipe Transaksi
                                                 <i class="fa {{ request('sort') === 'transaction_type' ? (request('direction') === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : 'fa-sort' }}"></i>
                                             </a>
                                         </th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-11 px-3">
+                                            Catatan
+                                        </th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
                                             <a href="{{ request()->fullUrlWithQuery(['sort' => 'amount', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc']) }}">
-                                                Amount
+                                                Total
                                                 <i class="fa {{ request('sort') === 'amount' ? (request('direction') === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : 'fa-sort' }}"></i>
                                             </a>
-                                        </th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-11 px-3">
-                                            Description
-                                        </th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
-                                            <a href="{{ request()->fullUrlWithQuery(['sort' => 'category', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc']) }}">
-                                                Category
-                                                <i class="fa {{ request('sort') === 'category' ? (request('direction') === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : 'fa-sort' }}"></i>
-                                            </a>
-                                        </th>
+                                        </th>                                   
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-11 px-3">
                                             Action
                                         </th>
@@ -91,28 +85,13 @@
                                             @endif
                                             
                                         </td>
-    
-                                        <td class="align-middle text-center text-sm px-3">
-                                            <p class="text-xs font-weight-bold mb-0">Rp. {{ number_format($item['amount'], 0, ',', '.')}}</p>
-                                        </td>
 
                                         <td class="align-middle text-center text-sm px-3">
                                             <p class="text-xs font-weight-bold mb-0">{{$item['description']}}</p>
                                         </td>
 
-                                        <td class="align-middle text-center px-3">
-                                            @if ($item['category'] == 'Pembelian bahan baku')
-                                                <span class="text-xs font-weight-bold mb-0">{{$item['category']}}</span>
-                                            @elseif ($item['category'] == 'Biaya operasional')
-                                                <span class="text-xs font-weight-bold mb-0">{{$item['category']}}</span>
-                                            @elseif ($item['category'] == 'Penjualan')
-                                                <span class="text-xs font-weight-bold mb-0">{{$item['category']}}</span>
-                                            @elseif ($item['category'] == 'Pendapatan tambahan')
-                                                <span class="text-xs font-weight-bold mb-0">{{$item['category']}}</span>
-                                            @else
-                                                <span class="text-xs font-weight-bold mb-0">No Status</span>
-                                            @endif
-                                            
+                                        <td class="align-middle text-center text-sm px-3">
+                                            <p class="text-xs font-weight-bold mb-0">Rp. {{ number_format($item['amount'], 0, ',', '.')}}</p>
                                         </td>
     
                                         <td class="align-middle text-center text-sm px-3">
