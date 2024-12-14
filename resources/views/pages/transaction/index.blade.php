@@ -14,7 +14,7 @@
                     <div class="card-header pb-0">
                         <div class="row">
                             <div class="col d-flex justify-content-between align-items-center">
-                                <h6>Tabel Transaksi</h6>
+                                <h6><b>Tabel Transaksi</b></h6>
                                 <button class="btn btn-primary btn-sm">
                                     <a href="/transaction/add" class="text-white">
                                         Tambah Transaksi <i class="fa fa-plus"></i>
