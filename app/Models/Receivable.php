@@ -7,23 +7,24 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class Transaction extends Model
+class Receivable extends Model
 {
     use HasApiTokens, HasFactory, Notifiable;
-    protected $table = 'transactions';
+    protected $table = 'receivables';
     public $timestamps = true;
     protected $fillable = [
         'user_id',
-        'date',
-        'transaction_type',
-        'debit',
-        'credit',
+        'transaction_id',
+        'invoice',
         'amount',
-        'description',
-        'contact',
-        'tax',
+        'paid_amount',
+        'rest_amount',
+        'interest_rate',
+        'date',
         'due_date',
-        'interest_rate'
+        'status',
+        'description'
+        
     ];
 
     public function user()
@@ -31,13 +32,8 @@ class Transaction extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function debitAccount()
+    public function transaction()
     {
-        return $this->belongsTo(Account::class, 'debit');
-    }
-
-    public function creditAccount()
-    {
-        return $this->belongsTo(Account::class, 'credit');
+        return $this->belongsTo(Transaction::class);
     }
 }

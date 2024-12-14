@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,6 +26,7 @@ use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\ResetPassword;
 use App\Http\Controllers\ChangePassword;
 use App\Http\Controllers\DebtController;
+use App\Http\Controllers\Debts_ReceivablesController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\HppcalculationController;
@@ -44,12 +46,15 @@ Route::get('/', function () {return redirect('/dashboard');})->middleware('auth'
 Route::group(['middleware' => 'auth'], function () {
 
 	// Debt (hutang)
-	Route::get('/debt', [DebtController::class, 'index'])->name('debt');
-	Route::get('/debt/add', [DebtController::class, 'add'])->name('debt.add');
-	Route::post('/debt/add/perform', [DebtController::class, 'create'])->name('debt.add.perform');
-	Route::get('/debt/edit/{id}', [DebtController::class, 'edit'])->name('debt.edit');
-	Route::put('/debt/edit/{id}/perform', [DebtController::class, 'update'])->name('debt.edit.perform');
-	Route::delete('/debt/delete/{id}', [DebtController::class, 'delete'])->name('debt.delete');
+	Route::get('/debt_receivable', [Debts_ReceivablesController::class, 'index'])->name('debt_receivable');
+	Route::get('/debt_receivable/add', [Debts_ReceivablesController::class, 'add'])->name('debt_receivable.add');
+	Route::post('/debt_receivable/add/perform', [Debts_ReceivablesController::class, 'create'])->name('debt_receivable.add.perform');
+	Route::get('/debt_receivable/edit/{id}', [Debts_ReceivablesController::class, 'edit'])->name('debt_receivable.edit');
+	Route::post('/debt_receivable/{id}/payment', [Debts_ReceivablesController::class, 'payment'])->name('debt_receivable.payment');
+	Route::delete('/debt_receivable/delete/{id}', [Debts_ReceivablesController::class, 'delete'])->name('debt_receivable.delete');
+
+	// Payment
+	Route::delete('/payment/delete/{id}',[Debts_ReceivablesController::class, 'deletePayment'])->name('payment.delete');
 
 	// Products
 	Route::get('/product', [ProductController::class, 'index'])->name('product');
@@ -83,6 +88,14 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/transaction/edit/{id}', [TransactionController::class, 'edit'])->name('transaction.edit');
 	Route::put('/transaction/edit/{id}/perform', [TransactionController::class, 'update'])->name('transaction.edit.perform');
 	Route::delete('/transaction/delete/{id}', [TransactionController::class, 'delete'])->name('transaction.delete');
+
+	// Account
+	Route::get('/account', [AccountController::class, 'index'])->name('account');
+	Route::get('/account/add', [AccountController::class, 'add'])->name('account.add');
+	Route::post('/account/add/perform', [AccountController::class, 'create'])->name('account.add.perform');
+	Route::get('/account/edit/{id}', [AccountController::class, 'edit'])->name('account.edit');
+	Route::put('/account/edit/{id}/perform', [AccountController::class, 'update'])->name('account.edit.perform');
+	Route::delete('/account/delete/{id}', [AccountController::class, 'delete'])->name('account.delete');
 
 
 	// NAMBAH ROUTE DIATAS LINE INI AJAAA!!!!
