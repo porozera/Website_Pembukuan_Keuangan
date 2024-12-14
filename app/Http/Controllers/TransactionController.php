@@ -18,7 +18,7 @@ class TransactionController extends Controller
             $query->orderBy($request->input('sort'), $request->input('direction'));
         }
         $sortDirection = request('direction', 'desc'); 
-        $transaction = $query->orderBy('created_at', $sortDirection)->paginate(4);
+        $transaction = $query->orderBy('created_at', $sortDirection)->paginate(10);
         $account = Account::all();
 
         return view('pages.transaction.index', compact('transaction','account'));

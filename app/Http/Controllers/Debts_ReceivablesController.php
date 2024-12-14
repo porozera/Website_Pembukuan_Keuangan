@@ -26,11 +26,6 @@ class Debts_ReceivablesController extends Controller
         return view('pages.debt_receivable.index', compact('debt_receivable'));
     }
 
-    public function delete($id){
-        Debts_Receivables::where('id',$id) -> delete();
-        return redirect('/debt_receivable')->with('success', 'Data deleted successfully!');
-    }
-
     public function edit($id)
     {
         $debt_receivable = Debts_Receivables::find($id);
@@ -109,5 +104,49 @@ class Debts_ReceivablesController extends Controller
         }
         return redirect()->route('debt_receivable.edit', $attributes['debts_receivables_id'])->with('success', 'Payment created successfully!');
     }
+    
+    public function delete($id){
+        Debts_Receivables::where('id',$id) -> delete();
+        return redirect('/debt_receivable')->with('success', 'Data deleted successfully!');
+    }
+
+    public function deletePayment($id)
+{
+    // Cari data Payment berdasarkan ID
+    $payment = Payment::findOrFail($id);
+
+    // Cari data Transaction terkait berdasarkan kode pembayaran
+    $transaction = Transaction::where('description', $payment->description)
+                               ->where('amount', $payment->paid_amount)
+                               ->where('date', $payment->date)
+                               ->first();
+
+    // Jika Transaction ditemukan, hapus datanya
+    if ($transaction) {
+        $transaction->delete();
+    }
+
+    // Cari data Debts_Receivables terkait
+    $debts = Debts_Receivables::findOrFail($payment->debts_receivables_id);
+
+    // Kembalikan paid_amount ke kondisi sebelumnya
+    $debts->paid_amount -= $payment->paid_amount;
+    $debts->rest_amount = $debts->amount - $debts->paid_amount;
+
+    // Perbarui status berdasarkan rest_amount
+    if ($debts->rest_amount == 0) {
+        $debts->status = 'Lunas';
+    } else {
+        $debts->status = 'Belum Lunas';
+    }
+    $debts->save();
+
+    // Hapus Payment
+    $payment->delete();
+
+    // Redirect dengan pesan sukses
+    return redirect()->route('debt_receivable.edit', $debts->id)->with('success', 'Payment and related transaction deleted successfully!');
+}
+
     
 }

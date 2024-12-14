@@ -90,13 +90,13 @@
                                         <td class="align-middle text-center text-sm px-3">
                                             <a href="/transaction/edit/{{$item['id']}}" class="text-primary font-weight-bold text-xs me-3"
                                                data-toggle="tooltip" data-original-title="Edit user">
-                                                Edit
+                                                <b>Edit</b>
                                             </a>
                                             <form action="/transaction/delete/{{ $item['id'] }}" method="POST" style="display:inline;" id="transactionDeleteForm">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="button" class="text-danger font-weight-bold text-xs" data-bs-toggle="modal" data-bs-target="#deleteModal" style="border:none;background:none;" data-id="{{ $item['id'] }}">
-                                                    Delete
+                                                    <b>Delete</b>
                                                 </button>
                                             </form>
                                         </td>                                        

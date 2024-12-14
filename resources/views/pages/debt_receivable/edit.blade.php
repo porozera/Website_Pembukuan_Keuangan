@@ -5,6 +5,11 @@
         <div class="container">
             <div class="container">
                 <div class="row">
+                    @if(session('success'))
+                    <div class="alert alert-success" role="alert" id="successMessage">
+                        {{ session('success') }}
+                    </div>
+                    @endif
                     <!-- Card 1 -->
                     <div class="col-5">
                         <div class="card">
@@ -33,21 +38,21 @@
                                 <div class="row">
                                     <div class="form-group">
                                         <label for="amountInput" class="form-control-label">Total</label>
-                                        <input class="form-control" type="number" name="amount" placeholder="" value="{{ number_format($debt_receivable['amount'], 0, ',', '.')}}" disabled readonly>
+                                        <input class="form-control" type="text" name="amount" placeholder="" value="Rp. {{ number_format($debt_receivable['amount'], 0, ',', '.')}}" disabled readonly>
                                         @error('amount') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group">
                                         <label for="amountInput" class="form-control-label">Dibayar</label>
-                                        <input class="form-control" type="number" name="paid_amount" placeholder="" value="{{ number_format($debt_receivable['paid_amount'], 0, ',', '.')}}" disabled readonly>
+                                        <input class="form-control" type="text" name="paid_amount" placeholder="" value=" Rp. {{ number_format($debt_receivable['paid_amount'], 0, ',', '.')}}" disabled readonly>
                                         @error('paid_amount') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-group">
                                         <label for="amountInput" class="form-control-label">Sisa yang harus dibayar</label>
-                                        <input class="form-control" type="number" name="rest_amount" placeholder="" value="{{ number_format($debt_receivable['rest_amount'], 0, ',', '.')}}" disabled readonly>
+                                        <input class="form-control" type="text" name="rest_amount" placeholder="" value="Rp. {{ number_format($debt_receivable['rest_amount'], 0, ',', '.')}}" disabled readonly>
                                         @error('rest_amount') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
                                     </div>
                                 </div>
@@ -118,7 +123,7 @@
                                                 </td>
             
                                                 <td class="align-middle text-center text-sm px-3">
-                                                    <form action="/product/delete/{{ $item['id'] }}" method="POST" style="display:inline;">
+                                                    <form action="/payment/delete/{{ $item['id'] }}" method="POST" style="display:inline;">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="button" class="text-danger font-weight-bold text-xs" data-bs-toggle="modal" data-bs-target="#deleteModal" style="border:none;background:none;" data-id="{{ $item['id'] }}">
@@ -185,6 +190,51 @@
         </div>
     </div>
 </div>
+    <!-- Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+            Are you sure to delete this data?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" id="submitFormButton">Delete</button>
+            </div>
+        </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const successMessage = document.getElementById('successMessage');
+            if (successMessage) {
+                setTimeout(() => {
+                    successMessage.style.display = 'none';
+                }, 3000);
+            }
+        });
+        const deleteButtons = document.querySelectorAll('[data-bs-target="#deleteModal"]');
+        let deleteForm = null;
+
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const id = this.getAttribute('data-id');
+                deleteForm = document.querySelector(`form[action="/payment/delete/${id}"]`);
+            });
+        });
+
+        document.getElementById('submitFormButton').addEventListener('click', function () {
+            if (deleteForm) {
+                deleteForm.submit();
+            }
+        });
+    </script>
 @endsection
 
 
