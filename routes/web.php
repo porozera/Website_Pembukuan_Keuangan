@@ -29,6 +29,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\HppcalculationController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\ReportController;
 
 
 Route::get('/', function () {return redirect('/dashboard');})->middleware('auth');
@@ -84,6 +85,13 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::put('/transaction/edit/{id}/perform', [TransactionController::class, 'update'])->name('transaction.edit.perform');
 	Route::delete('/transaction/delete/{id}', [TransactionController::class, 'delete'])->name('transaction.delete');
 
+	// Reports
+	Route::get('/report', [ReportController::class, 'index'])->name('report');
+	Route::get('/report/add', [ReportController::class, 'add'])->name('report.add');
+	Route::post('/report/add/perform', [ReportController::class, 'create'])->name('report.add.perform');
+	Route::get('/report/edit/{id}', [ReportController::class, 'edit'])->name('report.edit');
+	Route::put('/report/edit/{id}/perform', [ReportController::class, 'update'])->name('report.edit.perform');
+	Route::delete('/report/delete/{id}', [ReportController::class, 'delete'])->name('report.delete');
 
 	// NAMBAH ROUTE DIATAS LINE INI AJAAA!!!!
 	Route::get('/virtual-reality', [PageController::class, 'vr'])->name('virtual-reality');
