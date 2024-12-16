@@ -29,34 +29,34 @@
                             <table class="table align-items-center mb-0">
                                 <thead>
                                     <tr>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
+                                        <th class="text-start text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
                                             <a href="{{ request()->fullUrlWithQuery(['sort' => 'code', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc']) }}">
                                                 Kode
                                                 <i class="fa {{ request('sort') === 'code' ? (request('direction') === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : 'fa-sort' }}"></i>
                                             </a>
                                         </th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
+                                        <th class="text-start text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
                                             <a href="{{ request()->fullUrlWithQuery(['sort' => 'name', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc']) }}">
                                                 Nama
                                                 <i class="fa {{ request('sort') === 'name' ? (request('direction') === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : 'fa-sort' }}"></i>
                                             </a>
                                         </th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
+                                        <th class="text-start text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
                                             <a href="{{ request()->fullUrlWithQuery(['sort' => 'category', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc']) }}">
                                                 Kategori
                                                 <i class="fa {{ request('sort') === 'category' ? (request('direction') === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : 'fa-sort' }}"></i>
                                             </a>
                                         </th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
+                                        <th class="text-start text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
                                             <a href="{{ request()->fullUrlWithQuery(['sort' => 'account_type', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc']) }}">
                                                 Tipe Akun
                                                 <i class="fa {{ request('sort') === 'account_type' ? (request('direction') === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : 'fa-sort' }}"></i>
                                             </a>
                                         </th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-11 px-3">
+                                        <th class="text-start text-uppercase text-secondary text-xxs font-weight-bolder opacity-11 px-3">
                                             Description
                                         </th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-11 px-3">
+                                        <th class="text-start text-uppercase text-secondary text-xxs font-weight-bolder opacity-11 px-3">
                                             Action
                                         </th>
                                     </tr>
@@ -69,27 +69,27 @@
                                     @foreach ($account as $item )
                                     <tr>
     
-                                        <td class="align-middle text-center text-sm px-3">
+                                        <td class="align-middle text-start text-sm px-3">
                                             <p class="text-xs font-weight-bold mb-0">{{ $item['code']}}</p>
                                         </td>
     
-                                        <td class="align-middle text-center text-sm px-3">
+                                        <td class="align-middle text-start text-sm px-3">
                                             <p class="text-xs font-weight-bold mb-0">{{$item['name']}}</p>
                                         </td>
 
-                                        <td class="align-middle text-center text-sm px-3">
+                                        <td class="align-middle text-start text-sm px-3">
                                             <p class="text-xs font-weight-bold mb-0">{{$item['category']}}</p>
                                         </td>
 
-                                        <td class="align-middle text-center text-sm px-3">
+                                        <td class="align-middle text-start text-sm px-3">
                                             <p class="text-xs font-weight-bold mb-0">{{$item['account_type']}}</p>
                                         </td>
 
-                                        <td class="align-middle text-center text-sm px-3">
+                                        <td class="align-middle text-start text-sm px-3">
                                             <p class="text-xs font-weight-bold mb-0">{{$item['description']}}</p>
                                         </td>
     
-                                        <td class="align-middle text-center text-sm px-3">
+                                        <td class="align-middle text-start text-sm px-3">
                                             <a href="/account/edit/{{$item['id']}}" class="text-primary font-weight-bold text-xs me-3"
                                                data-toggle="tooltip" data-original-title="Edit">
                                                 <b>Edit</b>

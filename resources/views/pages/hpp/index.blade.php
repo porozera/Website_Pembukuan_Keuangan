@@ -1,7 +1,7 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
 
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'HPP Calculation'])
+    @include('layouts.navbars.auth.topnav', ['title' => 'HPP'])
     <div class="container-fluid py-4">
         @if(session('success'))
         <div class="alert alert-success" role="alert" id="successMessage">
@@ -28,44 +28,44 @@
                             <table class="table align-items-center mb-0">
                                 <thead>
                                     <tr>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
+                                        <th class="text-start text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
                                             <a href="{{ request()->fullUrlWithQuery(['sort' => 'id', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc']) }}">
                                                 No
                                                 <i class="fa {{ request('sort') === 'id' ? (request('direction') === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : 'fa-sort' }}"></i>
                                             </a>
                                         </th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
+                                        <th class="text-start text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
                                             <a href="{{ request()->fullUrlWithQuery(['sort' => 'id', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc']) }}">
                                                 Product Name
                                                 <i class="fa {{ request('sort') === 'id' ? (request('direction') === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : 'fa-sort' }}"></i>
                                             </a>
                                         </th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
+                                        <th class="text-start text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
                                             <a href="{{ request()->fullUrlWithQuery(['sort' => 'hpp', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc']) }}">
                                                 HPP
                                                 <i class="fa {{ request('sort') === 'hpp' ? (request('direction') === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : 'fa-sort' }}"></i>
                                             </a>
                                         </th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
+                                        <th class="text-start text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
                                             <a href="{{ request()->fullUrlWithQuery(['sort' => 'gross_profit', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc']) }}">
                                                 Gross Profit
                                                 <i class="fa {{ request('sort') === 'gross_profit' ? (request('direction') === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : 'fa-sort' }}"></i>
                                             </a>
                                         </th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
+                                        <th class="text-start text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
                                             <a href="{{ request()->fullUrlWithQuery(['sort' => 'recommended_price', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc']) }}">
                                                 Recommended Price
                                                 <i class="fa {{ request('sort') === 'recommended_price' ? (request('direction') === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : 'fa-sort' }}"></i>
                                             </a>
                                         </th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
+                                        <th class="text-start text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
                                             <a href="{{ request()->fullUrlWithQuery(['sort' => 'created_at', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc']) }}">
                                                 Created at
                                                 <i class="fa {{ request('sort') === 'created_at' ? (request('direction') === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : 'fa-sort' }}"></i>
                                             </a>
                                         </th>
                                     
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-11 px-3">
+                                        <th class="text-start text-uppercase text-secondary text-xxs font-weight-bolder opacity-11 px-3">
                                             Action
                                         </th>
                                     </tr>
@@ -77,30 +77,30 @@
                                     @endphp
                                     @foreach ($hpp as $item )
                                     <tr> 
-                                        <td class="align-middle text-center text-sm px-3">
+                                        <td class="align-middle text-start text-sm px-3">
                                             <p class="text-xs font-weight-bold mb-0">{{$number++}}</p>
                                         </td>
-                                        <td class="align-middle text-center text-sm px-3">
+                                        <td class="align-middle text-start text-sm px-3">
                                             <p class="text-xs font-weight-bold mb-0">{{$item->product->name}}</p>
                                         </td>
     
-                                        <td class="align-middle text-center text-sm px-3">
+                                        <td class="align-middle text-start text-sm px-3">
                                             <p class="text-xs font-weight-bold mb-0">{{$item->hpp}}</p>
                                         </td>
     
-                                        <td class="align-middle text-center px-3">
+                                        <td class="align-middle text-start px-3">
                                             <span class="text-secondary text-xs font-weight-bold">{{$item->gross_profit}}</span>
                                         </td>
 
-                                        <td class="align-middle text-center px-3">
+                                        <td class="align-middle text-start px-3">
                                             <span class="text-secondary text-xs font-weight-bold">{{$item->recommended_price}}</span>
                                         </td>
 
-                                        <td class="align-middle text-center text-sm px-3">
+                                        <td class="align-middle text-start text-sm px-3">
                                             <p class="text-xs font-weight-bold mb-0">{{ $item->created_at->format('d-m-Y') }}</p>
                                         </td>
     
-                                        <td class="align-middle text-center text-sm px-3">
+                                        <td class="align-middle text-start text-sm px-3">
                                             <a href="/hpp/detail/{{$item['id']}}" class="text-primary font-weight-bold text-xs me-3"
                                                data-toggle="tooltip" data-original-title="Edit user">
                                                 Detail

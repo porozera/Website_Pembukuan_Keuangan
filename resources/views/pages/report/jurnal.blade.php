@@ -39,22 +39,25 @@
                             <table class="table align-items-center mb-0">
                                 <thead>
                                     <tr>
-                                        <th class="text-right text-uppercase text-secondary text-xxs font-weight-bolder opacity-11 px-3">
+                                        <th class="text-start text-uppercase text-secondary text-xxs font-weight-bolder opacity-11 px-3">
                                             Tanggal
                                         </th>
-                                        <th class="text-right text-uppercase text-secondary text-xxs font-weight-bolder opacity-11 px-3">
+                                        <th class="text-start text-uppercase text-secondary text-xxs font-weight-bolder opacity-11 px-3">
                                             Transaksi
                                         </th>
-                                        <th class="text-right text-uppercase text-secondary text-xxs font-weight-bolder opacity-11 px-3">
-                                            Kode Akun
+                                        <th class="text-start text-uppercase text-secondary text-xxs font-weight-bolder opacity-11 px-3">
+                                            Kode
                                         </th>
-                                        <th class="text-right text-uppercase text-secondary text-xxs font-weight-bolder opacity-11 px-3">
+                                        <th class="text-start text-uppercase text-secondary text-xxs font-weight-bolder opacity-11 px-3">
+                                            Akun
+                                        </th>
+                                        <th class="text-start text-uppercase text-secondary text-xxs font-weight-bolder opacity-11 px-3">
                                             Debit
                                         </th>
-                                        <th class="text-right text-uppercase text-secondary text-xxs font-weight-bolder opacity-11 px-3">
+                                        <th class="text-start text-uppercase text-secondary text-xxs font-weight-bolder opacity-11 px-3">
                                             Kredit
                                         </th>
-                                        <th class="text-right text-uppercase text-secondary text-xxs font-weight-bolder opacity-11 px-3">
+                                        <th class="text-start text-uppercase text-secondary text-xxs font-weight-bolder opacity-11 px-3">
                                             Catatan
                                         </th>
                                     </tr>
@@ -64,59 +67,66 @@
                                     @foreach ($jurnal as $item )
                                     
                                     <tr>
-                                        <td class="align-middle text-right text-sm px-3" rowspan="2">
+                                        <td class="align-middle text-start text-sm px-3" rowspan="2">
                                             <p class="text-xs font-weight-bold mb-0">{{$item->date}}</p>
                                         </td>      
-                                        <td class="align-middle text-right text-sm px-3" rowspan="2">
+                                        <td class="align-middle text-start text-sm px-3" rowspan="2">
                                             <p class="text-xs font-weight-bold mb-0">{{$item->transaction_type}}</p>
                                         </td>       
-                                        <td class="align-middle text-right text-sm px-3">
-                                            <p class="text-xs font-weight-bold mb-0">{{$item->debit}}</p>
-                                        </td>     
-                                        <td class="align-middle text-right text-sm px-3">
+                                        <td class="align-middle text-start text-sm px-3">
+                                            <p class="text-xs font-weight-bold mb-0">{{$item->debit_code}}</p>
+                                        </td>   
+                                        <td class="align-middle text-start text-sm px-3">
+                                            <p class="text-xs font-weight-bold mb-0">{{$item->debit_account}}</p>
+                                        </td>    
+                                        <td class="align-middle text-start text-sm px-3">
                                             <p class="text-xs font-weight-bold mb-0">Rp. {{ number_format($item->amount, 0, ',', '.') }}</p>
                                         </td>  
-                                        <td class="align-middle text-right text-sm px-3">
+                                        <td class="align-middle text-start text-sm px-3">
                                             <p class="text-xs font-weight-bold mb-0">Rp. 0</p>
                                         </td>  
-                                        <td class="align-middle text-right text-sm px-3" rowspan="2">
-                                            <p class="text-xs font-weight-bold mb-0">catata</p>
+                                        <td class="align-middle text-start text-sm px-3" rowspan="2">
+                                            <p class="text-xs font-weight-bold mb-0">{{$item->description}}</p>
                                         </td>                          
                                     </tr>
                                     <tr>
-                                        <td class="align-middle text-right text-sm px-3">
-                                            <p class="text-xs font-weight-bold mb-0">{{$item->credit}}</p>
+                                        <td class="align-middle text-start text-sm px-3">
+                                            <p class="text-xs font-weight-bold mb-0">{{$item->credit_code}}</p>
                                         </td>    
-                                        <td class="align-middle text-right text-sm px-3">
+                                        <td class="align-middle text-start text-sm px-3">
+                                            <p class="text-xs font-weight-bold mb-0">{{$item->credit_account}}</p>
+                                        </td> 
+                                        <td class="align-middle text-start text-sm px-3">
                                             <p class="text-xs font-weight-bold mb-0">Rp. 0</p>
                                         </td>  
-                                        <td class="align-middle text-right text-sm px-3">
+                                        <td class="align-middle text-start text-sm px-3">
                                             <p class="text-xs font-weight-bold mb-0">Rp. {{ number_format($item->amount, 0, ',', '.') }}</p>
                                         </td>  
                                     </tr>
                                     @endforeach
                                     <tr>
-                                        <td class="align-middle text-right text-sm px-3">
+                                        <td class="align-middle text-start text-sm px-3">
                                             <p class="text-xs font-weight-bold mb-0"></p>
                                         </td>    
-                                        <td class="align-middle text-right text-sm px-3">
+                                        <td class="align-middle text-start text-sm px-3">
                                             <p class="text-xs font-weight-bold mb-0"></p>
                                         </td> 
-                                        <td class="align-middle text-right text-sm px-3">
+                                        <td class="align-middle text-start text-sm px-3">
+                                            <p class="text-xs font-weight-bold mb-0"></p>
+                                        </td> 
+                                        <td class="align-middle text-start text-sm px-3">
                                             <p class="text-xs font-weight-bold mb-0"><b>Total</b></p>
                                         </td> 
-                                        <td class="align-middle text-right text-sm px-3">
-                                            <p class="text-xs font-weight-bold mb-0">Rp. {{ number_format($totalDebit, 0, ',', '.') }}</p>
+                                        <td class="align-middle text-start text-sm px-3">
+                                            <p class="text-xs font-weight-bold mb-0"><b>Rp. {{ number_format($totalDebit, 0, ',', '.') }}</b></p>
                                         </td> 
-                                        <td class="align-middle text-right text-sm px-3">
-                                            <p class="text-xs font-weight-bold mb-0">Rp. {{ number_format($totalKredit, 0, ',', '.') }}</p>
+                                        <td class="align-middle text-start text-sm px-3">
+                                            <p class="text-xs font-weight-bold mb-0"><b>Rp. {{ number_format($totalKredit, 0, ',', '.') }}</b></p>
                                         </td> 
-                                        <td class="align-middle text-right text-sm px-3"></td>
+                                        <td class="align-middle text-start text-sm px-3"></td>
+                                    </tr>
                                 </tbody>
-                            </table>
-                            <div class="card-footer">
-                                
-                            </div>                            
+                            </table>                         
                     </div>
                 </div>
             </div>

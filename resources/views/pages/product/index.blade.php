@@ -1,7 +1,7 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
 
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'Products'])
+    @include('layouts.navbars.auth.topnav', ['title' => 'Produk'])
     <div class="container-fluid py-4">
         @if(session('success'))
         <div class="alert alert-success" role="alert" id="successMessage">
@@ -29,22 +29,22 @@
                             <table class="table align-items-center mb-0">
                                 <thead>
                                     <tr>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
+                                        <th class="text-start text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
                                             <a href="{{ request()->fullUrlWithQuery(['sort' => 'id', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc']) }}">
                                                 No
                                                 <i class="fa {{ request('sort') === 'id' ? (request('direction') === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : 'fa-sort' }}"></i>
                                             </a>
                                         </th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
+                                        <th class="text-start text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
                                             <a href="{{ request()->fullUrlWithQuery(['sort' => 'name', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc']) }}">
                                                 Name
                                                 <i class="fa {{ request('sort') === 'name' ? (request('direction') === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : 'fa-sort' }}"></i>
                                             </a>
                                         </th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-11 px-3">
+                                        <th class="text-start text-uppercase text-secondary text-xxs font-weight-bolder opacity-11 px-3">
                                             Description
                                         </th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-11 px-3">
+                                        <th class="text-start text-uppercase text-secondary text-xxs font-weight-bolder opacity-11 px-3">
                                             Action
                                         </th>
                                     </tr>
@@ -56,19 +56,19 @@
                                     @endphp
                                     @foreach ($product as $item )
                                     <tr>
-                                        <td class="align-middle text-center text-sm px-3">
+                                        <td class="align-middle text-start text-sm px-3">
                                             <p class="text-xs font-weight-bold mb-0">{{$number++}}</p>
                                         </td>
     
-                                        <td class="align-middle text-center text-sm px-3">
+                                        <td class="align-middle text-start text-sm px-3">
                                             <p class="text-xs font-weight-bold mb-0">{{ $item['name']}}</p>
                                         </td>
     
-                                        <td class="align-middle text-center text-sm px-3">
+                                        <td class="align-middle text-start text-sm px-3">
                                             <p class="text-xs font-weight-bold mb-0">{{$item['description']}}</p>
                                         </td>
     
-                                        <td class="align-middle text-center text-sm px-3">
+                                        <td class="align-middle text-start text-sm px-3">
                                             <a href="/product/edit/{{$item['id']}}" class="text-primary font-weight-bold text-xs me-3"
                                                data-toggle="tooltip" data-original-title="Edit">
                                                 <b>Edit</b>

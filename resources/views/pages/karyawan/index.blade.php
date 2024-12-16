@@ -1,7 +1,7 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
 
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'Kelola Karyawan'])
+    @include('layouts.navbars.auth.topnav', ['title' => 'Karyawan'])
     <div class="container-fluid py-4">
         @if(session('success'))
         <div class="alert alert-success" role="alert" id="successMessage">
@@ -44,19 +44,19 @@
                                     @endphp
                                     @foreach ($karyawan as $item)
                                     <tr>
-                                        <td class="align-middle text-center text-sm px-3">
+                                        <td class="align-middle text-start text-sm px-3">
                                             <p class="text-xs font-weight-bold mb-0">{{$number++}}</p>
                                         </td>
-                                        <td class="align-middle text-center text-sm px-3">
+                                        <td class="align-middle text-start text-sm px-3">
                                             <p class="text-xs font-weight-bold mb-0">{{ $item['username'] }}</p>
                                         </td>
-                                        <td class="align-middle text-center text-sm px-3">
+                                        <td class="align-middle text-start text-sm px-3">
                                             <p class="text-xs font-weight-bold mb-0">{{ $item['role'] }}</p>
                                         </td>
-                                        <td class="align-middle text-center text-sm px-3">
+                                        <td class="align-middle text-start text-sm px-3">
                                             <p class="text-xs font-weight-bold mb-0">{{ $item['email'] }}</p>
                                         </td>
-                                        <td class="align-middle text-center text-sm px-3">
+                                        <td class="align-middle text-start text-sm px-3">
                                             <div class="password-group">
                                                 <input 
                                                     type="password" 
@@ -72,10 +72,10 @@
                                                 </button>
                                             </div>
                                         </td>
-                                        <td class="align-middle text-center text-sm px-3">
+                                        <td class="align-middle text-start text-sm px-3">
                                             <p class="text-xs font-weight-bold mb-0">Rp {{ number_format($item['gaji'], 0, ',', '.') }}</p>
                                         </td>
-                                        <td class="align-middle text-center text-sm px-3">
+                                        <td class="align-middle text-start text-sm px-3">
                                             <a href="/karyawan/edit/{{$item['id']}}" class="text-primary font-weight-bold text-xs me-3"
                                                data-toggle="tooltip" data-original-title="Edit">
                                                 <b>Edit</b>
