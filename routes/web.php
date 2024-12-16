@@ -30,6 +30,7 @@ use App\Http\Controllers\Debts_ReceivablesController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\HppcalculationController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\TransactionController;
 
 
@@ -97,6 +98,9 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::put('/account/edit/{id}/perform', [AccountController::class, 'update'])->name('account.edit.perform');
 	Route::delete('/account/delete/{id}', [AccountController::class, 'delete'])->name('account.delete');
 
+	// Report
+	Route::get('/report', [ReportController::class, 'index'])->name('report');
+	Route::get('/report/jurnal', [ReportController::class, 'jurnal'])->name('reports.jurnal');
 
 	// NAMBAH ROUTE DIATAS LINE INI AJAAA!!!!
 	Route::get('/virtual-reality', [PageController::class, 'vr'])->name('virtual-reality');

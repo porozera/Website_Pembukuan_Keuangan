@@ -20,4 +20,19 @@ class Account extends Model
         'description'
         
     ];
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
+    public function debitTransactions()
+    {
+        return $this->hasMany(Transaction::class, 'debit', 'code');
+    }
+
+    public function creditTransactions()
+    {
+        return $this->hasMany(Transaction::class, 'credit', 'code');
+    }
 }

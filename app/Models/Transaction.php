@@ -30,14 +30,4 @@ class Transaction extends Model
     {
         return $this->belongsTo(User::class);
     }
-
-    public function debitAccount()
-    {
-        return $this->belongsTo(Account::class, 'debit', 'code');
-    }
-
-    public function creditAccount()
-    {
-        return $this->belongsTo(Account::class, 'credit', 'code');
-    }
 }
