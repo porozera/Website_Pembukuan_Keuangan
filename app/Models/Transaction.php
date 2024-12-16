@@ -16,8 +16,10 @@ class Transaction extends Model
         'user_id',
         'date',
         'transaction_type',
-        'debit',
-        'credit',
+        'debit_code',
+        'credit_code',
+        'debit_account',
+        'credit_account',
         'amount',
         'description',
         'contact',
@@ -29,5 +31,15 @@ class Transaction extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function debitAccount()
+    {
+        return $this->belongsTo(Account::class, 'debit_code', 'code');
+    }
+
+    public function creditAccount()
+    {
+        return $this->belongsTo(Account::class, 'credit_code', 'code');
     }
 }

@@ -18,8 +18,10 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table ->date('date');
             $table ->string('transaction_type');
-            $table ->string('debit');
-            $table ->string('credit');
+            $table ->string('debit_code');
+            $table ->string('credit_code');
+            $table ->string('debit_account');
+            $table ->string('credit_account');
             $table ->decimal('amount', 15, 2);
             $table ->text('description');
             $table ->string('contact')->nullable();

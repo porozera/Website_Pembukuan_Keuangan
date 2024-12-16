@@ -20,8 +20,8 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
 
             // Kolom stok
-            $table->decimal('initial_stock', 8, 2); // Stok awal (qty)
-            $table->decimal('final_stock', 8, 2); // Stok akhir (qty)
+            $table->decimal('initial_stock', 15, 2); // Stok awal (qty)
+            $table->decimal('final_stock', 15, 2); // Stok akhir (qty)
             $table->decimal('quantity_produced', 8, 2); // Jumlah barang diproduksi (qty)
 
             // Biaya produksi
@@ -30,9 +30,9 @@ return new class extends Migration
 
             // Penjualan
             $table->decimal('sales_revenue', 15, 2)->nullable(); // Pendapatan penjualan
-            $table->decimal('sales_return', 10, 2)->default(0); // Retur penjualan
-            $table->decimal('sales_discount', 10, 2)->default(0); // Diskon penjualan
-            $table->decimal('sales_shipping_cost', 10, 2)->default(0); // Biaya pengiriman
+            $table->decimal('sales_return', 15, 2)->default(0); // Retur penjualan
+            $table->decimal('sales_discount', 15, 2)->default(0); // Diskon penjualan
+            $table->decimal('sales_shipping_cost', 15, 2)->default(0); // Biaya pengiriman
 
             // Perhitungan
             $table->decimal('hpp', 15, 2)->nullable(); // Harga Pokok Penjualan
