@@ -30,6 +30,9 @@
                                 </div>
                                 <div class="col-3 d-flex align-items-end">
                                     <button type="submit" class="btn btn-primary">Filter</button>
+                                    <a href="{{ route('reports.jurnal.export', ['start_date' => request('start_date'), 'end_date' => request('end_date')]) }}" class="btn btn-success ms-2">
+                                        Export Excel
+                                    </a>
                                 </div>
                             </div>
                        </form>

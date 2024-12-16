@@ -32,6 +32,8 @@ use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\HppcalculationController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\TransactionController;
+use App\Exports\JurnalExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 Route::get('/', function () {return redirect('/dashboard');})->middleware('auth');
@@ -101,6 +103,12 @@ Route::group(['middleware' => 'auth'], function () {
 	// Report
 	Route::get('/report', [ReportController::class, 'index'])->name('report');
 	Route::get('/report/jurnal', [ReportController::class, 'jurnal'])->name('reports.jurnal');
+	Route::get('/reports/jurnal/export', function () {
+		$startDate = request('start_date', now()->startOfMonth()->toDateString());
+		$endDate = request('end_date', now()->endOfMonth()->toDateString());
+	
+		return Excel::download(new JurnalExport($startDate, $endDate), 'jurnal-umum.xlsx');
+	})->name('reports.jurnal.export');
 
 	// NAMBAH ROUTE DIATAS LINE INI AJAAA!!!!
 	Route::get('/virtual-reality', [PageController::class, 'vr'])->name('virtual-reality');
