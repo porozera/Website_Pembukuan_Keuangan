@@ -77,7 +77,7 @@
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="button" class="text-danger font-weight-bold text-xs" data-bs-toggle="modal" data-bs-target="#deleteModal" style="border:none;background:none;" data-id="{{ $item['id'] }}">
-                                                    <b>Delete {{$item['id']}}</b>
+                                                    <b>Delete</b>
                                                 </button>
                                             </form>
                                         </td>                                        
