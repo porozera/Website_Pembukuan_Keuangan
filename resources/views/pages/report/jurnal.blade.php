@@ -118,13 +118,13 @@
                                             <p class="text-xs font-weight-bold mb-0"></p>
                                         </td> 
                                         <td class="align-middle text-start text-sm px-3">
-                                            <p class="text-xs font-weight-bold mb-0"><b>Total</b></p>
+                                            <b>Total</b>
                                         </td> 
                                         <td class="align-middle text-start text-sm px-3">
-                                            <p class="text-xs font-weight-bold mb-0"><b>Rp. {{ number_format($totalDebit, 0, ',', '.') }}</b></p>
+                                           <b>Rp. {{ number_format($totalDebit, 0, ',', '.') }}</b>
                                         </td> 
                                         <td class="align-middle text-start text-sm px-3">
-                                            <p class="text-xs font-weight-bold mb-0"><b>Rp. {{ number_format($totalKredit, 0, ',', '.') }}</b></p>
+                                            <b>Rp. {{ number_format($totalKredit, 0, ',', '.') }}</b>
                                         </td> 
                                         <td class="align-middle text-start text-sm px-3"></td>
                                     </tr>
