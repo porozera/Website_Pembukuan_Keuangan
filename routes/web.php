@@ -113,6 +113,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/report/neraca', [ReportController::class, 'neraca'])->name('reports.neraca');
 	Route::get('/reports/neraca/export', [ReportController::class, 'exportNeraca'])->name('reports.neraca.export');
 
+	Route::get('/report/labarugi', [ReportController::class, 'labarugi'])->name('reports.labarugi');
+
 	// NAMBAH ROUTE DIATAS LINE INI AJAAA!!!!
 	Route::get('/virtual-reality', [PageController::class, 'vr'])->name('virtual-reality');
 	Route::get('/rtl', [PageController::class, 'rtl'])->name('rtl');
