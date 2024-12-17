@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\LabaRugiExport;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -114,8 +115,7 @@ class ReportController extends Controller
     }
 
     
-    public function labarugi(Request $request)
-{
+    public function labarugi(Request $request){
     // Default tanggal
     $startDate = $request->input('start_date') ? Carbon::parse($request->input('start_date')) : Carbon::now()->startOfMonth();
     $endDate = $request->input('end_date') ? Carbon::parse($request->input('end_date')) : Carbon::now();
@@ -195,5 +195,14 @@ class ReportController extends Controller
         'labaBebanOperasional' => $labaBebanOperasional,
         'labaBersih' => $labaBersih
     ]);
-}
+    }
+
+    public function exportLabarugi(Request $request)
+    {
+        $startDate = $request->query('start_date');
+        $endDate = $request->query('end_date');
+    
+        return Excel::download(new LabaRugiExport($startDate, $endDate), 'laporan-laba-rugi.xlsx');
+    }
+
 }   

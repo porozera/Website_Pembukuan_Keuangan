@@ -12,7 +12,7 @@
             <div class="col-12">
                 <div class="card mb-4">
                     <div class="card-header pb-0">
-                        <form method="GET" action="{{ route('reports.jurnal') }}">
+                        <form method="GET" action="{{ route('reports.labarugi') }}">
                             <div class="row">
                                 <div class="col-3">
                                     <div class="form-group">
@@ -30,7 +30,7 @@
                                 </div>
                                 <div class="col-3 d-flex align-items-end">
                                     <button type="submit" class="btn btn-primary">Filter</button>
-                                    <a href="{{ route('reports.jurnal.export', ['start_date' => request('start_date'), 'end_date' => request('end_date')]) }}" class="btn btn-success ms-2">
+                                    <a href="{{ route('reports.labarugi.export', ['start_date' => request('start_date'), 'end_date' => request('end_date')]) }}" class="btn btn-success ms-2">
                                         Export Excel
                                     </a>
                                 </div>
