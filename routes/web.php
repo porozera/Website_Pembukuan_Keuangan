@@ -30,7 +30,10 @@ use App\Http\Controllers\Debts_ReceivablesController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\HppcalculationController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\TransactionController;
+use App\Exports\JurnalExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 Route::get('/', function () {return redirect('/dashboard');})->middleware('auth');
@@ -97,6 +100,21 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::put('/account/edit/{id}/perform', [AccountController::class, 'update'])->name('account.edit.perform');
 	Route::delete('/account/delete/{id}', [AccountController::class, 'delete'])->name('account.delete');
 
+	// Report
+	Route::get('/report', [ReportController::class, 'index'])->name('report');
+	Route::get('/report/jurnal', [ReportController::class, 'jurnal'])->name('reports.jurnal');
+	Route::get('/reports/jurnal/export', function () {
+		$startDate = request('start_date', now()->startOfMonth()->toDateString());
+		$endDate = request('end_date', now()->endOfMonth()->toDateString());
+	
+		return Excel::download(new JurnalExport($startDate, $endDate), 'jurnal-umum.xlsx');
+	})->name('reports.jurnal.export');
+
+	Route::get('/report/neraca', [ReportController::class, 'neraca'])->name('reports.neraca');
+	Route::get('/reports/neraca/export', [ReportController::class, 'exportNeraca'])->name('reports.neraca.export');
+
+	Route::get('/report/labarugi', [ReportController::class, 'labarugi'])->name('reports.labarugi');
+	Route::get('/reports/labarugi/export', [ReportController::class, 'exportLabarugi'])->name('reports.labarugi.export');
 
 	// NAMBAH ROUTE DIATAS LINE INI AJAAA!!!!
 	Route::get('/virtual-reality', [PageController::class, 'vr'])->name('virtual-reality');

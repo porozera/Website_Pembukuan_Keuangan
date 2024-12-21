@@ -71,12 +71,16 @@ class Debts_ReceivablesController extends Controller
         }
         $debts->save();
 
+        $account = json_decode($request->input('account'), true);
+
         if ($debts->type == 'Hutang'){
             $transaction = Transaction::create([
                 "date" => $attributes['date'],
                 "transaction_type" => 'Pembayaran Hutang',
-                "debit" => 'Hutang Usaha (2-20100)',
-                "credit" => $attributes['account'],
+                "debit_account" => 'Hutang Usaha',
+                "debit_code" => '2-20100',
+                "credit_account" => $account['name'],
+                "credit_code" => $account['code'],
                 "amount" => $attributes['paid_amount'],
                 "description" => $attributes['description'],
                 "user_id" => auth()->id(),
@@ -90,8 +94,10 @@ class Debts_ReceivablesController extends Controller
             $transaction = Transaction::create([
                 "date" => $attributes['date'],
                 "transaction_type" => 'Pembayaran Piutang',
-                "debit" => $attributes['account'],
-                "credit" => 'Piutang Usaha (1-10100)',
+                "debit_code" => $account['code'],
+                "debit_account" => $account['name'],
+                "credit_account" => 'Piutang Usaha',
+                "credit_code" => '1-10100',
                 "amount" => $attributes['paid_amount'],
                 "description" => $attributes['description'],
                 "user_id" => auth()->id(),

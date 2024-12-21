@@ -30,6 +30,7 @@ class TransactionController extends Controller
     }
 
     public function create(Request $request){
+
         $attributes = $request->validate([
             'date' => 'required',
             'transaction_type' => 'required',
@@ -39,6 +40,9 @@ class TransactionController extends Controller
             'description' => 'required',
         ]);
 
+        $debitData = json_decode($request->input('debit'), true);
+        $creditData = json_decode($request->input('credit'), true);
+
         $bunga = $attributes['amount'] * ( $request->input('interest_rate', 0) / 100);
         $pajak = $attributes['amount']* ($request->input('tax', 0) / 100);
         $total = $attributes['amount'] + $bunga + $pajak;
@@ -46,8 +50,10 @@ class TransactionController extends Controller
         $transaction = Transaction::create([
             "date" => $attributes['date'],
             "transaction_type" => $attributes['transaction_type'],
-            "debit" => $attributes['debit'],
-            "credit" => $attributes['credit'],
+            "debit_code" => $debitData['code'],
+            "debit_account" => $debitData['name'],
+            "credit_code" => $creditData['code'],
+            "credit_account" => $creditData['name'],
             "amount" => $total,
             "description" => $attributes['description'],
             "user_id" => auth()->id(),
@@ -116,6 +122,9 @@ class TransactionController extends Controller
             'description' => 'required',
         ]);
 
+        $debitData = json_decode($request->input('debit'), true);
+        $creditData = json_decode($request->input('credit'), true);
+
         $bunga = $attributes['amount'] * ( $request->input('interest_rate', 0) / 100);
         $pajak = $attributes['amount']* ($request->input('tax', 0) / 100);
         $total = $attributes['amount'] + $bunga + $pajak;
@@ -124,8 +133,10 @@ class TransactionController extends Controller
         $transaction -> update([
             "date" => $attributes['date'],
             "transaction_type" => $attributes['transaction_type'],
-            "debit" => $attributes['debit'],
-            "credit" => $attributes['credit'],
+            "debit_code" => $debitData['code'],
+            "debit_account" => $debitData['name'],
+            "credit_code" => $creditData['code'],
+            "credit_account" => $creditData['name'],
             "amount" => $total,
             "description" => $attributes['description'],
             "user_id" => auth()->id(),

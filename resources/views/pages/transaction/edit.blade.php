@@ -46,8 +46,10 @@
                                         <div class="form-group">
                                             <label id="debitLabel" for="debitInput" class="form-control-label">Simpan ke (Debit)</label>
                                             <select class="form-control" name="debit" id="debit">
-                                                <!-- Options will be dynamically populated -->
-                                                <option selected value="{{$transaction->debit}}">{{$transaction->debit}}</option>
+                                                <!-- Option akan diisi dinamis melalui JavaScript -->
+                                                <option selected value="{{ json_encode(['name' => $transaction->debit_account, 'code' => $transaction->debit_code]) }}">
+                                                    {{ $transaction->debit_account }} ({{ $transaction->debit_code }})
+                                                </option>
                                             </select>
                                             @error('debit') <p class="text-danger text-xs pt-1">{{$message}}</p> @enderror
                                         </div>
@@ -57,8 +59,10 @@
                                         <div class="form-group">
                                             <label id="creditLabel" for="creditInput" class="form-control-label">Diterima dari (Kredit)</label>
                                             <select class="form-control" name="credit" id="credit">
-                                                <!-- Options will be dynamically populated -->
-                                                <option selected value="{{$transaction->credit}}">{{$transaction->credit}}</option>
+                                                <!-- Option akan diisi dinamis melalui JavaScript -->
+                                                <option selected value="{{ json_encode(['name' => $transaction->credit_account, 'code' => $transaction->credit_code]) }}">
+                                                    {{ $transaction->credit_account }} ({{ $transaction->credit_code }})
+                                                </option>
                                             </select>
                                             @error('credit') <p class="text-danger text-xs pt-1">{{$message}}</p> @enderror
                                         </div>
@@ -169,7 +173,6 @@
             // Submit the form
             document.getElementById('transactionAddForm').submit();
         });
-
         document.addEventListener('DOMContentLoaded', function () {
     const accounts = @json($account->groupBy('category'));
     const transactionType = document.getElementById('transaction_type');
@@ -178,63 +181,81 @@
     const debitInput = document.getElementById('debit');
     const creditInput = document.getElementById('credit');
 
-    // Simulasikan perubahan nilai untuk memicu logika awal
+    const selectedDebitAccount = JSON.stringify({
+        name: '{{ $transaction->debit_account }}',
+        code: '{{ $transaction->debit_code }}'
+    });
+
+    const selectedCreditAccount = JSON.stringify({
+        name: '{{ $transaction->credit_account }}',
+        code: '{{ $transaction->credit_code }}'
+    });
+
+    // Memasukkan akun yang sudah ada ke dalam dropdown saat halaman dimuat
     transactionType.dispatchEvent(new Event('change'));
 
-    // Jalankan fungsi untuk menghitung total awal
-    calculateTotal();
+    // Populasi pilihan berdasarkan jenis transaksi
+    populateOptions(debitInput, ['Kas & Bank', 'Persediaan'], selectedDebitAccount);
+    populateOptions(creditInput, ['Pendapatan', 'Pendapatan Lainnya'], selectedCreditAccount);
 
     transactionType.addEventListener('change', function () {
         const selectedType = transactionType.value;
 
-        // Reset debit and credit options
+        // Reset debit dan credit options
         debitInput.innerHTML = '<option selected>Pilih Akun</option>';
         creditInput.innerHTML = '<option selected>Pilih Akun</option>';
 
         if (selectedType === 'Pemasukan') {
             debitLabel.textContent = 'Simpan ke (Debit)';
             creditLabel.textContent = 'Diterima dari (Kredit)';
-            populateOptions(debitInput, ['Kas & Bank', 'Persediaan']);
-            populateOptions(creditInput, ['Pendapatan', 'Pendapatan Lainnya']);
+            populateOptions(debitInput, ['Kas & Bank', 'Persediaan'], selectedDebitAccount);
+            populateOptions(creditInput, ['Pendapatan', 'Pendapatan Lainnya'], selectedCreditAccount);
 
         } else if (selectedType === 'Pengeluaran') {
             debitLabel.textContent = 'Untuk biaya (Debit)';
             creditLabel.textContent = 'Diambil dari (Kredit)';
-            populateOptions(debitInput, ['Beban', 'Beban Lainnya', 'Harga Pokok Penjualan', 'Persediaan', 'Kas & Bank', 'Akun Piutan', 'Harta Tetap']);
-            populateOptions(creditInput, ['Kas & Bank', 'Persediaan', 'Harta Lancar Lainnya', 'Harta Tetap', 'Harta Lainnya']);
+            populateOptions(debitInput, ['Beban', 'Beban Lainnya', 'Harga Pokok Penjualan', 'Persediaan', 'Kas & Bank', 'Akun Piutan', 'Harta Tetap'], selectedDebitAccount);
+            populateOptions(creditInput, ['Kas & Bank', 'Persediaan', 'Harta Lancar Lainnya', 'Harta Tetap', 'Harta Lainnya'], selectedCreditAccount);
 
         } else if (selectedType === 'Hutang') {
             debitLabel.textContent = 'Simpan ke (Debit)';
             creditLabel.textContent = 'Hutang dari (Kredit)';
-            populateOptions(debitInput, ['Kas & Bank', 'Persediaan', 'Harta Lancar Lainnya', 'Harta Tetap', 'Harga Pokok Penjualan', 'Beban', 'Beban Lainnya']);
-            populateOptions(creditInput, ['Akun Hutang', 'Kewajiban Lancar Lainnya', 'Kewajiban Jangka Panjang']);
+            populateOptions(debitInput, ['Kas & Bank', 'Persediaan', 'Harta Lancar Lainnya', 'Harta Tetap', 'Harga Pokok Penjualan', 'Beban', 'Beban Lainnya'], selectedDebitAccount);
+            populateOptions(creditInput, ['Akun Hutang', 'Kewajiban Lancar Lainnya', 'Kewajiban Jangka Panjang'], selectedCreditAccount);
 
         } else if (selectedType === 'Piutang') {
             debitLabel.textContent = 'Simpan ke (Debit)';
             creditLabel.textContent = 'Dari (Kredit)';
-            populateOptions(debitInput, ['Akun Piutang']);
-            populateOptions(creditInput, ['Kas & Bank', 'Persediaan', 'Harta Lancar Lainnya', 'Pendapatan', 'Pendapatan Lainnya', 'Modal']);
+            populateOptions(debitInput, ['Akun Piutang'], selectedDebitAccount);
+            populateOptions(creditInput, ['Kas & Bank', 'Persediaan', 'Harta Lancar Lainnya', 'Pendapatan', 'Pendapatan Lainnya', 'Modal'], selectedCreditAccount);
 
         } else if (selectedType === 'Pemasukan Sebagai Piutang') {
             debitLabel.textContent = 'Simpan ke (Debit)';
             creditLabel.textContent = 'Diterima dari (Kredit)';
-            populateOptions(debitInput, ['Akun Piutang']);
-            populateOptions(creditInput, ['Pendapatan', 'Pendapatan Lainnya']);
+            populateOptions(debitInput, ['Akun Piutang'], selectedDebitAccount);
+            populateOptions(creditInput, ['Pendapatan', 'Pendapatan Lainnya'], selectedCreditAccount);
 
         } else if (selectedType === 'Pengeluaran Sebagai Hutang') {
             debitLabel.textContent = 'Untuk biaya (Debit)';
             creditLabel.textContent = 'Diambil dari (Kredit)';
-            populateOptions(debitInput, ['Harga Pokok Penjualan', 'Beban', 'Beban Lainnya', 'Persediaan', 'Kas & Bank', 'Akun Piutang', 'Harta Tetap']);
-            populateOptions(creditInput, ['Pendapatan', 'Pendapatan Lainnya']);
+            populateOptions(debitInput, ['Harga Pokok Penjualan', 'Beban', 'Beban Lainnya', 'Persediaan', 'Kas & Bank', 'Akun Piutang', 'Harta Tetap'], selectedDebitAccount);
+            populateOptions(creditInput, ['Pendapatan', 'Pendapatan Lainnya'], selectedCreditAccount);
         }
     });
 
-    function populateOptions(selectElement, accountTypes) {
+    function populateOptions(selectElement, accountTypes, selectedAccount) {
         accountTypes.forEach(type => {
             if (accounts[type]) {
                 accounts[type].forEach(account => {
                     const option = document.createElement('option');
-                    option.value = `${account.name} (${account.code})`;
+                    const accountData = JSON.stringify({ name: account.name, code: account.code });
+
+                    // Memeriksa apakah account yang dipilih sama dengan yang ada di database
+                    if (accountData === selectedAccount) {
+                        option.selected = true;  // Menambahkan selected jika account yang sama
+                    }
+
+                    option.value = accountData;
                     option.textContent = `${account.name} (${account.code})`;
                     selectElement.appendChild(option);
                 });

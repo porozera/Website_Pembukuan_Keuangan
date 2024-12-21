@@ -28,34 +28,34 @@
                             <table class="table align-items-center mb-0">
                                 <thead>
                                     <tr>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
+                                        <th class="text-start text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
                                             <a href="{{ request()->fullUrlWithQuery(['sort' => 'id', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc']) }}">
                                                 No
                                                 <i class="fa {{ request('sort') === 'id' ? (request('direction') === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : 'fa-sort' }}"></i>
                                             </a>
                                         </th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
+                                        <th class="text-start text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
                                             <a href="{{ request()->fullUrlWithQuery(['sort' => 'date', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc']) }}">
                                                 Tanggal
                                                 <i class="fa {{ request('sort') === 'date' ? (request('direction') === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : 'fa-sort' }}"></i>
                                             </a>
                                         </th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
+                                        <th class="text-start text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
                                             <a href="{{ request()->fullUrlWithQuery(['sort' => 'transaction_type', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc']) }}">
                                                 Tipe Transaksi
                                                 <i class="fa {{ request('sort') === 'transaction_type' ? (request('direction') === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : 'fa-sort' }}"></i>
                                             </a>
                                         </th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-11 px-3">
+                                        <th class="text-start text-uppercase text-secondary text-xxs font-weight-bolder opacity-11 px-3">
                                             Catatan
                                         </th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
+                                        <th class="text-start text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
                                             <a href="{{ request()->fullUrlWithQuery(['sort' => 'amount', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc']) }}">
                                                 Total
                                                 <i class="fa {{ request('sort') === 'amount' ? (request('direction') === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : 'fa-sort' }}"></i>
                                             </a>
                                         </th>                                   
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-11 px-3">
+                                        <th class="text-start text-uppercase text-secondary text-xxs font-weight-bolder opacity-11 px-3">
                                             Action
                                         </th>
                                     </tr>
@@ -67,27 +67,27 @@
                                     @endphp
                                     @foreach ($transaction as $item )
                                     <tr>
-                                        <td class="align-middle text-center text-sm px-3">
+                                        <td class="align-middle text-start text-sm px-3">
                                             <p class="text-xs font-weight-bold mb-0">{{$number++}}</p>
                                         </td>
     
-                                        <td class="align-middle text-center px-3">
+                                        <td class="align-middle text-start px-3">
                                             <span class="text-secondary text-xs font-weight-bold">{{$item['date']}}</span>
                                         </td>
 
-                                        <td class="align-middle text-center px-3">
+                                        <td class="align-middle text-start px-3">
                                             <span class="text-secondary text-xs font-weight-bold">{{$item['transaction_type']}}</span>
                                         </td>
 
-                                        <td class="align-middle text-center text-sm px-3">
+                                        <td class="align-middle text-start text-sm px-3">
                                             <p class="text-xs font-weight-bold mb-0">{{$item['description']}}</p>
                                         </td>
 
-                                        <td class="align-middle text-center text-sm px-3">
+                                        <td class="align-middle text-start text-sm px-3">
                                             <p class="text-xs font-weight-bold mb-0">Rp. {{ number_format($item['amount'], 0, ',', '.')}}</p>
                                         </td>
     
-                                        <td class="align-middle text-center text-sm px-3">
+                                        <td class="align-middle text-start text-sm px-3">
                                             <a href="/transaction/edit/{{$item['id']}}" class="text-primary font-weight-bold text-xs me-3"
                                                data-toggle="tooltip" data-original-title="Edit user">
                                                 <b>Edit</b>

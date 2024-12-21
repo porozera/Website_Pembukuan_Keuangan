@@ -226,13 +226,18 @@
                 if (accounts[type]) {
                     accounts[type].forEach(account => {
                         const option = document.createElement('option');
-                        option.value = `${account.name} (${account.code})`;
+                        // Simpan name dan code sebagai JSON string
+                        option.value = JSON.stringify({
+                            name: account.name,
+                            code: account.code
+                        });
                         option.textContent = `${account.name} (${account.code})`;
                         selectElement.appendChild(option);
                     });
                 }
             });
         }
+
     });
 
      // Function to format number to currency

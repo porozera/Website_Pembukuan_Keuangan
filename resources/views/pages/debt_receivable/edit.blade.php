@@ -1,7 +1,7 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
 
 @section('content')
-    @include('layouts.navbars.auth.topnav', ['title' => 'Edit Debts'])
+    @include('layouts.navbars.auth.topnav', ['title' => 'Detail Hutang Piutang'])
         <div class="container">
             <div class="container">
                 <div class="row">
@@ -169,7 +169,7 @@
                             <label for="statusInput" class="form-control-label">Akun</label>
                             <select class="form-control" name="account">
                                 @foreach ($account as $item)  
-                                <option value="{{ $item['name'] . ' (' . $item['code'] . ')' }}">
+                                <option value="{{ json_encode(['name' => $item['name'], 'code' => $item['code']]) }}">
                                     {{ $item['name'] . ' (' . $item['code'] . ')' }}
                                 </option>
                                 @endforeach
@@ -186,6 +186,10 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
                     <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
+                {{-- <input type="hidden" class="form-control" id="contact" name="contact" value="{{$debt_receivable->contact}}">
+                <input type="hidden" class="form-control" id="tax" name="tax" value="{{$debt_receivable->tax}}">
+                <input type="hidden" class="form-control" id="due_date" name="due_date" value="{{$debt_receivable->due_date}}">
+                <input type="hidden" class="form-control" id="interest_rate" name="interest_rate" value="{{$debt_receivable->interest_rate}}"> --}}
             </form>
         </div>
     </div>
