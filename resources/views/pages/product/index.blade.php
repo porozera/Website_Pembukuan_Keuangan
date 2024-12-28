@@ -14,11 +14,11 @@
                     <div class="card-header pb-0">
                         <div class="row">
                             <div class="col d-flex justify-content-between align-items-center">
-                                <h6><b>Products table</b></h6>
+                                <h6><b>Tabel Produk</b></h6>
                                 <button class="btn btn-primary btn-sm">
                                     <a href="/product/add" class="text-white">
                                         <i class="fa fa-plus"></i>
-                                        Add Products 
+                                        Tambah Produk 
                                     </a>
                                 </button>
                             </div>
@@ -37,12 +37,12 @@
                                         </th>
                                         <th class="text-start text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">
                                             <a href="{{ request()->fullUrlWithQuery(['sort' => 'name', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc']) }}">
-                                                Name
+                                                Nama
                                                 <i class="fa {{ request('sort') === 'name' ? (request('direction') === 'asc' ? 'fa-sort-up' : 'fa-sort-down') : 'fa-sort' }}"></i>
                                             </a>
                                         </th>
                                         <th class="text-start text-uppercase text-secondary text-xxs font-weight-bolder opacity-11 px-3">
-                                            Description
+                                            Deskrpisi
                                         </th>
                                         <th class="text-start text-uppercase text-secondary text-xxs font-weight-bolder opacity-11 px-3">
                                             Action

@@ -20,13 +20,22 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
 
             // Kolom stok
-            $table->decimal('initial_stock', 15, 2); // Stok awal (qty)
-            $table->decimal('final_stock', 15, 2); // Stok akhir (qty)
-            $table->decimal('quantity_produced', 8, 2); // Jumlah barang diproduksi (qty)
+            $table->decimal('initial_stock', 15, 2)->default(0); // Stok awal (qty)
+            $table->decimal('final_stock', 15, 2)->default(0); // Stok akhir (qty)
+            $table->decimal('quantity_produced', 15, 2)->default(0); // Jumlah barang diproduksi (qty)
 
-            // Biaya produksi
-            $table->decimal('production_cost', 15, 2); // Total biaya produksi
-            $table->decimal('price_per_unit', 10, 2); // Harga produksi per unit
+            // Rincian biaya produksi
+            $table->decimal('raw_material_cost', 15, 2)->default(0); // Biaya bahan baku
+            $table->decimal('labor_cost', 15, 2)->default(0); // Biaya tenaga kerja
+            $table->decimal('overhead_cost', 15, 2)->default(0); // Biaya overhead (operasional, listrik, dll.)
+            $table->decimal('packaging_cost', 15, 2)->default(0); // Biaya pengemasan
+            $table->decimal('other_production_costs', 15, 2)->default(0); // Biaya lainnya
+
+            // Total biaya produksi
+            $table->decimal('total_production_cost', 15, 2)->default(0);
+
+            // Biaya produksi per unit
+            $table->decimal('price_per_unit', 10, 2)->default(0);
 
             // Penjualan
             $table->decimal('sales_revenue', 15, 2)->nullable(); // Pendapatan penjualan

@@ -17,7 +17,7 @@
                                     @method('POST')
                                     <div class="mb-3 row">
                                         <div class="col-6">
-                                            <h7><b>Detail</b></h7>
+                                            <h7><b>Detail HPP</b></h7>
                                         </div>
                                         <div class="col-6 text-end">
                                                 <button type="button" class="btn btn-primary btn-sm w-20">
@@ -39,8 +39,8 @@
                                     
                                     <div class="mb-3 row">
                                         <div class="col-md">
-                                            <label for="sales_revenue" class="form-label">Sales Revenue</label>
-                                            <input type="number" name="sales_revenue" id="sales_revenue" class="form-control" placeholder="Rp" value="{{$hpp->sales_revenue}}"  readonly>
+                                            <label for="sales_revenue" class="form-label">Pendapatan Penjualan</label>
+                                            <input type="text" name="sales_revenue" id="sales_revenue" class="form-control" placeholder="Rp" value="Rp. {{ number_format($hpp['sales_revenue'], 0, ',', '.')}}"  readonly>
                                             @error('sales_revenue') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
                                         </div>
                                     </div>
@@ -48,82 +48,110 @@
                                     <div class="mb-3 row">
                                         <div class="col-md">
                                             <label for="hpp" class="form-label">HPP</label>
-                                            <input type="number" name="hpp" id="hpp" class="form-control" placeholder="Rp" value="{{$hpp->hpp}}"  readonly>
+                                            <input type="text" name="hpp" id="hpp" class="form-control" placeholder="Rp" value="Rp. {{ number_format($hpp['raw_material_cost'], 0, ',', '.')}}"  readonly>
                                             @error('hpp') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
                                         </div>
                                     </div>
 
                                     <div class="mb-3 row">
                                         <div class="col-md">
-                                            <label for="gross_profit" class="form-label">Gross Profit</label>
-                                            <input type="number" name="gross_profit" id="gross_profit" class="form-control" placeholder="Rp" value="{{$hpp->gross_profit}}"   readonly>
+                                            <label for="gross_profit" class="form-label">Laba Kotor</label>
+                                            <input type="text" name="gross_profit" id="gross_profit" class="form-control" placeholder="Rp" value="Rp. {{ number_format($hpp['gross_profit'], 0, ',', '.')}}"   readonly>
                                             @error('gross_profit') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
                                         </div>
                                     </div>
 
                                     <div class="mb-3 row">
                                         <div class="col-md">
-                                            <label for="recommended_price" class="form-label">Recommended Price</label>
-                                            <input type="number" name="recommended_price" id="recommended_price" class="form-control" placeholder="Rp" value="{{$hpp->recommended_price}}"  readonly>
+                                            <label for="recommended_price" class="form-label">Rekomendasi Harga</label>
+                                            <input type="text" name="recommended_price" id="recommended_price" class="form-control" placeholder="Rp" value="Rp. {{ number_format($hpp['recommended_price'], 0, ',', '.')}}"  readonly>
                                             @error('recommended_price') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
                                         </div>
                                     </div>
 
                                     <div class="mb-3 row">
-                                        <h7><b>Production</b></h7>
+                                        <h7><b>Biaya Produksi</b></h7>
                                     </div>
                                     <div class="mb-3 row">
                                         <div class="col-md-6">
-                                            <label for="production_cost" class="form-label">Production Cost</label>
-                                            <input type="number" name="production_cost" id="production_cost" class="form-control" placeholder="Rp" value="{{$hpp->production_cost}}" disabled readonly>
-                                            @error('production_cost') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
+                                            <label for="raw_material_cost" class="form-label">Biaya Bahan Baku</label>
+                                            <input type="text" name="raw_material_cost" id="raw_material_cost" class="form-control" placeholder="Rp" value="Rp. {{ number_format($hpp['raw_material_cost'], 0, ',', '.')}}" disabled readonly>
+                                            @error('raw_material_cost') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="labor_cost" class="form-label">Biaya Tenaga Kerja</label>
+                                            <input type="text" name="labor_cost" id="labor_cost" class="form-control" placeholder="Rp" value="Rp. {{ number_format($hpp['labor_cost'], 0, ',', '.')}}" disabled readonly>
+                                            @error('labor_cost') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <div class="col-md-6">
+                                            <label for="overhead_cost" class="form-label">Biaya Operasional</label>
+                                            <input type="text" name="overhead_cost" id="overhead_cost" class="form-control" placeholder="Rp" value="Rp. {{ number_format($hpp['overhead_cost'], 0, ',', '.')}}" disabled readonly>
+                                            @error('overhead_cost') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="packaging_cost" class="form-label">Biaya Pengemasan</label>
+                                            <input type="text" name="packaging_cost" id="packaging_cost" class="form-control" placeholder="Rp" value="Rp. {{ number_format($hpp['packaging_cost'], 0, ',', '.')}}" disabled readonly>
+                                            @error('packaging_cost') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <div class="col-md-6">
+                                            <label for="other_production_costs" class="form-label">Biaya Produksi Lainnya</label>
+                                            <input type="text" name="other_production_costs" id="other_production_costs" class="form-control" placeholder="Rp" value="Rp. {{ number_format($hpp['other_production_costs'], 0, ',', '.')}}" disabled readonly>
+                                            @error('other_production_costs') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
                                         </div>
                                         <div class="col-md-6">
                                             <label for="quantity_produced" class="form-label">Quantity Produced</label>
-                                            <input type="number" name="quantity_produced" id="quantity_produced" class="form-control" placeholder="Qty" value="{{$hpp->quantity_produced}}"disabled readonly>
+                                            <input type="number" name="quantity_produced" id="quantity_produced" class="form-control" placeholder="Qty" value="{{ number_format($hpp['quantity_produced'], 0, ',', '.')}}"disabled readonly>
                                             @error('quantity_produced') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
                                         </div>
+                                    </div>
+
+                                    <div class="mb-3 row">
+                                        <h7><b>Stok Produk</b></h7>
                                     </div>
                                     
                                     <div class="mb-3 row">
                                         <div class="col-md-6">
                                             <label for="initial_stock" class="form-label">Initial Stock</label>
-                                            <input type="number" name="initial_stock" id="initial_stock" class="form-control" placeholder="Qty" value="{{$hpp->initial_stock}}" disabled readonly>
+                                            <input type="number" name="initial_stock" id="initial_stock" class="form-control" placeholder="Qty" value="{{ number_format($hpp['initial_stock'], 0, ',', '.')}}" disabled readonly>
                                             @error('initial_stock') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
                                         </div>
                                         <div class="col-md-6">
                                             <label for="final_stock" class="form-label">Final Stock</label>
-                                            <input type="number" name="final_stock" id="final_stock" class="form-control" placeholder="Qty" value="{{$hpp->final_stock}}" disabled readonly>
+                                            <input type="number" name="final_stock" id="final_stock" class="form-control" placeholder="Qty" value="{{ number_format($hpp['final_stock'], 0, ',', '.')}}" disabled readonly>
                                             @error('final_stock') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
                                         </div>
                                     </div>
 
                                     {{-- Sales --}}
                                     <div class="mb-3 row">
-                                        <h7><b>Sales</b></h7>
+                                        <h7><b>Penjualan</b></h7>
                                     </div>
                                     <div class="mb-3 row">
                                         <div class="col-md-6">
-                                            <label for="price_per_unit" class="form-label">Price Per Unit</label>
-                                            <input type="number" name="price_per_unit" id="price_per_unit" class="form-control" placeholder="Rp" value="{{$hpp->price_per_unit}}" disabled readonly>
+                                            <label for="price_per_unit" class="form-label">Harga Per Produk</label>
+                                            <input type="text" name="price_per_unit" id="price_per_unit" class="form-control" placeholder="Rp" value="Rp. {{ number_format($hpp['price_per_unit'], 0, ',', '.')}}" disabled readonly>
                                             @error('price_per_unit') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="sales_return" class="form-label">Sales Return</label>
-                                            <input type="number" name="sales_return" id="sales_return" class="form-control" placeholder="Rp" value="{{$hpp->sales_return}}"  disabled readonly>
+                                            <label for="sales_return" class="form-label">Retur Penjualan</label>
+                                            <input type="text" name="sales_return" id="sales_return" class="form-control" placeholder="Rp" value="Rp. {{ number_format($hpp['sales_return'], 0, ',', '.')}}"  disabled readonly>
                                             @error('sales_return') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
                                         </div>
                                     </div>
         
                                     <div class="mb-3 row">
                                         <div class="col-md-6">
-                                            <label for="sales_shipping_cost" class="form-label">Sales Shipping Cost</label>
-                                            <input type="number" name="sales_shipping_cost" id="sales_shipping_cost" class="form-control" placeholder="Rp" value="{{ $hpp->sales_shipping_cost}}"  disabled readonly>
+                                            <label for="sales_shipping_cost" class="form-label">Biaya Pengiriman</label>
+                                            <input type="text" name="sales_shipping_cost" id="sales_shipping_cost" class="form-control" placeholder="Rp" value="Rp. {{ number_format($hpp['sales_shipping_cost'], 0, ',', '.')}}"  disabled readonly>
                                             @error('sales_shipping_cost') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="sales_discount" class="form-label">Sales Discount</label>
-                                            <input type="number" name="sales_discount" id="sales_discount" class="form-control" placeholder="Rp" value="{{ $hpp->sales_discount}}"  disabled readonly>
+                                            <label for="sales_discount" class="form-label">Diskon Penjualan</label>
+                                            <input type="text" name="sales_discount" id="sales_discount" class="form-control" placeholder="Rp" value="Rp. {{ number_format($hpp['sales_discount'], 0, ',', '.')}}"  disabled readonly>
                                             @error('sales_discount') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
                                         </div>
                                     </div>  

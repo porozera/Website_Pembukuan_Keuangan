@@ -29,13 +29,13 @@
                             <table class="table align-items-center mb-0" style="table-layout: auto; width: 100%;">
                                 <thead>
                                     <tr>
-                                        <th style="width: 5%;" class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">No</th>
-                                        <th style="width: 20%;" class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">Nama</th>
-                                        <th style="width: 15%;" class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">Role</th>
-                                        <th style="width: 15%;" class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">Username</th>
-                                        <th style="width: 20%;" class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">Password</th>
-                                        <th style="width: 15%;" class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">Gaji</th>
-                                        <th style="width: 10%;" class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">Aksi</th>
+                                        <th style="width: 5%;" class="text-start text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">No</th>
+                                        <th style="width: 20%;" class="text-start text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">Nama</th>
+                                        <th style="width: 15%;" class="text-start text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">Role</th>
+                                        <th style="width: 15%;" class="text-start text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">Username</th>
+                                        <th style="width: 20%;" class="text-start text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">Password</th>
+                                        <th style="width: 15%;" class="text-start text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">Gaji</th>
+                                        <th style="width: 10%;" class="text-start text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 px-3">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>

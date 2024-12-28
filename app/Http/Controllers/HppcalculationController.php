@@ -34,59 +34,75 @@ class HppcalculationController extends Controller
         $attributes = $request->validate([
             'initial_stock' => 'required|numeric',
             'final_stock' => 'required|numeric',
-            'production_cost' => 'required|numeric',
+            'raw_material_cost' => 'required|numeric',
+            'labor_cost' => 'required|numeric',
+            'overhead_cost' => 'required|numeric',
+            'packaging_cost' => 'nullable|numeric',
+            'other_production_costs' => 'nullable|numeric',
             'quantity_produced' => 'required|numeric',
-            'sales_return' => 'required|numeric',
-            'sales_discount' => 'required|numeric',
-            'sales_shipping_cost' => 'required|numeric',
-            'price_per_unit' => 'required|numeric', // Harga jual
+            'sales_return' => 'nullable|numeric',
+            'sales_discount' => 'nullable|numeric',
+            'sales_shipping_cost' => 'nullable|numeric',// Harga jual
             'product_id' => 'required|exists:products,id',
         ]);
 
+        // Hitung Total Biaya Produksi
+        $total_production_cost = 
+            $attributes['raw_material_cost'] + 
+            $attributes['labor_cost'] + 
+            $attributes['overhead_cost'] +
+            ($attributes['packaging_cost'] ?? 0) +
+            ($attributes['other_production_costs'] ?? 0);
+
         // Hitung Harga Produksi per Unit
-        $price_per_unit = $attributes['production_cost'] / $attributes['quantity_produced'];
+        $price_per_unit = $total_production_cost / $attributes['quantity_produced'];
 
         // Hitung Quantity Sold
         $quantity_sold = $attributes['initial_stock'] - $attributes['final_stock'];
 
-        // Hitung Sales Revenue
-        $sales_revenue = $quantity_sold * $attributes['price_per_unit'];
+        // Hitung Pendapatan Penjualan
+        $sales_revenue = $quantity_sold * $price_per_unit;
 
         // Hitung HPP
-        $hpp = ($attributes['initial_stock'] * $price_per_unit) - $attributes['final_stock'];
+        $hpp = $quantity_sold * $price_per_unit;
 
-        // Hitung Gross Profit
-        $gross_profit = $sales_revenue 
-            - $hpp 
-            - $attributes['sales_return'] 
-            - $attributes['sales_discount'] 
-            - $attributes['sales_shipping_cost'];
+        // Hitung Laba Kotor
+        $gross_profit = $sales_revenue
+            - $hpp
+            - ($attributes['sales_return'] ?? 0)
+            - ($attributes['sales_discount'] ?? 0)
+            - ($attributes['sales_shipping_cost'] ?? 0);
 
-        // Hitung Recommended Price (margin 20%)
-        $recommended_price = $hpp > 0 ? $hpp * 1.2 : 0;
+        // Hitung Harga Rekomendasi (margin 20%)
+        $recommended_price = $hpp > 0 ? $hpp / $quantity_sold * 1.2 : 0;
 
-    
+        // Simpan data ke database
         $data = Hppcalculation::create([
             "initial_stock" => $attributes['initial_stock'],
             "final_stock" => $attributes['final_stock'],
-            "production_cost" => $attributes['production_cost'],
+            "raw_material_cost" => $attributes['raw_material_cost'],
+            "labor_cost" => $attributes['labor_cost'],
+            "overhead_cost" => $attributes['overhead_cost'],
+            "packaging_cost" => $attributes['packaging_cost'] ?? 0,
+            "other_production_costs" => $attributes['other_production_costs'] ?? 0,
             "quantity_produced" => $attributes['quantity_produced'],
+            "total_production_cost" => $total_production_cost,
             "price_per_unit" => $price_per_unit,
             "sales_revenue" => $sales_revenue,
-            "sales_return" => $attributes['sales_return'],
-            "sales_discount" => $attributes['sales_discount'],
-            "sales_shipping_cost" => $attributes['sales_shipping_cost'],
+            "sales_return" => $attributes['sales_return'] ?? 0,
+            "sales_discount" => $attributes['sales_discount'] ?? 0,
+            "sales_shipping_cost" => $attributes['sales_shipping_cost'] ?? 0,
             "hpp" => $hpp,
             "gross_profit" => $gross_profit,
             "recommended_price" => $recommended_price,
             "product_id" => $attributes['product_id'],
             "user_id" => auth()->id(),
         ]);
-    
+
         // Redirect dengan pesan sukses
         return redirect("/hpp")->with('success', 'HPP created successfully!');
     }
-    
+        
     
 
     public function detail($id)
@@ -105,75 +121,88 @@ class HppcalculationController extends Controller
         if (!$hpp) {
             return redirect('/edit_hpp')->with('error', 'Hpp not found');
         }
-        $allproduct = Product::all();
+        $product = Product::all();
     
-        return view('pages.hpp.edit', compact('hpp','allproduct'));
+        return view('pages.hpp.edit', compact('hpp','product'));
     }
 
-    public function update($id, Request $request)
+    public function update(Request $request, $id)
     {
-    // Validasi input
-    $attributes = $request->validate([
-        'initial_stock' => 'required|numeric',
-        'final_stock' => 'required|numeric',
-        'production_cost' => 'required|numeric',
-        'quantity_produced' => 'required|numeric',
-        'sales_return' => 'required|numeric',
-        'sales_discount' => 'required|numeric',
-        'sales_shipping_cost' => 'required|numeric',
-        'price_per_unit' => 'required|numeric', // Harga jual
-        'product_id' => 'required|exists:products,id',
-    ]);
-
-    try {
-        // Ambil data berdasarkan ID
-        $data = Hppcalculation::findOrFail($id);
-
+        // Temukan data berdasarkan ID
+        $hppCalculation = Hppcalculation::findOrFail($id);
+    
+        // Validasi input
+        $attributes = $request->validate([
+            'initial_stock' => 'required|numeric',
+            'final_stock' => 'required|numeric',
+            'raw_material_cost' => 'required|numeric',
+            'labor_cost' => 'required|numeric',
+            'overhead_cost' => 'required|numeric',
+            'packaging_cost' => 'nullable|numeric',
+            'other_production_costs' => 'nullable|numeric',
+            'quantity_produced' => 'required|numeric',
+            'sales_return' => 'nullable|numeric',
+            'sales_discount' => 'nullable|numeric',
+            'sales_shipping_cost' => 'nullable|numeric',
+            'product_id' => 'required|exists:products,id',
+        ]);
+    
+        // Hitung Total Biaya Produksi
+        $total_production_cost = 
+            $attributes['raw_material_cost'] + 
+            $attributes['labor_cost'] + 
+            $attributes['overhead_cost'] +
+            ($attributes['packaging_cost'] ?? 0) +
+            ($attributes['other_production_costs'] ?? 0);
+    
         // Hitung Harga Produksi per Unit
-        $price_per_unit = $attributes['production_cost'] / $attributes['quantity_produced'];
-
+        $price_per_unit = $total_production_cost / $attributes['quantity_produced'];
+    
         // Hitung Quantity Sold
         $quantity_sold = $attributes['initial_stock'] - $attributes['final_stock'];
-
-        // Hitung Sales Revenue
-        $sales_revenue = $quantity_sold * $attributes['price_per_unit'];
-
+    
+        // Hitung Pendapatan Penjualan
+        $sales_revenue = $quantity_sold * $price_per_unit;
+    
         // Hitung HPP
-        $hpp = ($attributes['initial_stock'] * $price_per_unit) - $attributes['final_stock'];
-
-        // Hitung Gross Profit
-        $gross_profit = $sales_revenue 
-            - $hpp 
-            - $attributes['sales_return'] 
-            - $attributes['sales_discount'] 
-            - $attributes['sales_shipping_cost'];
-
-        // Hitung Recommended Price (margin 20%)
-        $recommended_price = $hpp > 0 ? $hpp * 1.2 : 0;
-
-        // Update data
-        $data->update([
+        $hpp = $quantity_sold * $price_per_unit;
+    
+        // Hitung Laba Kotor
+        $gross_profit = $sales_revenue
+            - $hpp
+            - ($attributes['sales_return'] ?? 0)
+            - ($attributes['sales_discount'] ?? 0)
+            - ($attributes['sales_shipping_cost'] ?? 0);
+    
+        // Hitung Harga Rekomendasi (margin 20%)
+        $recommended_price = $hpp > 0 ? $hpp / $quantity_sold * 1.2 : 0;
+    
+        // Perbarui data ke database
+        $hppCalculation->update([
             "initial_stock" => $attributes['initial_stock'],
             "final_stock" => $attributes['final_stock'],
-            "production_cost" => $attributes['production_cost'],
+            "raw_material_cost" => $attributes['raw_material_cost'],
+            "labor_cost" => $attributes['labor_cost'],
+            "overhead_cost" => $attributes['overhead_cost'],
+            "packaging_cost" => $attributes['packaging_cost'] ?? 0,
+            "other_production_costs" => $attributes['other_production_costs'] ?? 0,
             "quantity_produced" => $attributes['quantity_produced'],
+            "total_production_cost" => $total_production_cost,
             "price_per_unit" => $price_per_unit,
             "sales_revenue" => $sales_revenue,
-            "sales_return" => $attributes['sales_return'],
-            "sales_discount" => $attributes['sales_discount'],
-            "sales_shipping_cost" => $attributes['sales_shipping_cost'],
+            "sales_return" => $attributes['sales_return'] ?? 0,
+            "sales_discount" => $attributes['sales_discount'] ?? 0,
+            "sales_shipping_cost" => $attributes['sales_shipping_cost'] ?? 0,
             "hpp" => $hpp,
             "gross_profit" => $gross_profit,
             "recommended_price" => $recommended_price,
             "product_id" => $attributes['product_id'],
             "user_id" => auth()->id(),
         ]);
-
-        return redirect('/hpp')->with('success', 'HPP updated successfully!');
-    } catch (\Exception $e) {
-        return redirect('/hpp')->with('error', 'Failed to update HPP: ' . $e->getMessage());
+    
+        // Redirect dengan pesan sukses
+        return redirect("/hpp")->with('success', 'HPP updated successfully!');
     }
-}
     
     public function delete($id){
         Hppcalculation::where('id',$id) -> delete();

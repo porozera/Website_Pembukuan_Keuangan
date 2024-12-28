@@ -15,8 +15,13 @@ class Hppcalculation extends Model
     protected $fillable = [
         'initial_stock',
         'final_stock',
-        'production_cost',
         'quantity_produced',
+        'raw_material_cost',
+        'labor_cost',
+        'overhead_cost',
+        'packaging_cost',
+        'other_production_costs',
+        'total_production_cost',
         'price_per_unit',
         'sales_revenue',
         'sales_return',
@@ -27,7 +32,6 @@ class Hppcalculation extends Model
         'gross_profit',
         'product_id',
         'user_id',
-
     ];
 
     public function user()
