@@ -200,7 +200,9 @@
                                         </tr>
                                     @else
                                     <tr>
-                                        <td  class="text-center">Tidak ada data pendapatan.</td>
+                                        <td></td>
+                                        <td  class="text-start">Tidak ada data beban operasional.</td>
+                                        <td></td>
                                     </tr>
                                     <tr>
                                         <td  class="text-start"><b>Total Beban Operasional</b></td>
@@ -256,7 +258,9 @@
                                         </tr>
                                     @else
                                     <tr>
-                                        <td  class="text-center">Tidak ada data pendapatan.</td>
+                                        <td></td>
+                                        <td  class="text-start">Tidak ada data pendapatan lainnya.</td>
+                                        <td></td>
                                     </tr>
                                     <tr>
                                         <td  class="text-start"><b>Total Pendapatan Lainnya</b></td>
@@ -312,7 +316,9 @@
                                         </tr>
                                     @else
                                     <tr>
-                                        <td  class="text-center">Tidak ada data pendapatan.</td>
+                                        <td></td>
+                                        <td  class="text-start">Tidak ada data beban lainnya.</td>
+                                        <td></td>
                                     </tr>
                                     <tr>
                                         <td  class="text-start"><b>Total Beban Lainnya</b></td>
