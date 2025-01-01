@@ -3,9 +3,9 @@
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => 'Edit Transaksi'])
     <div class="container">
-        <div class="row">
+        <div class="row mb-5">
             <div class="col">
-                <div class="card">
+                <div class="card card-hover">
                     <div class="card-header pb-0">
                         <div class="d-flex align-items-center">
                             <p class="mb-0">Edit Transaksi</p>
@@ -138,7 +138,7 @@
                             </div>
                             <!-- Submit Button -->
                             <div class="form-group text-end">
-                                <button type="button" class="btn btn-primary btn-sm w-20" data-bs-toggle="modal" data-bs-target="#addModal">
+                                <button type="button" class="btn btn-primary btn-sm w-20 btn-hover" data-bs-toggle="modal" data-bs-target="#addModal">
                                     Update
                                 </button>
                             </div>

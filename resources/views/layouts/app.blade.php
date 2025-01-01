@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html data-bs-theme="light" lang="en">
 
 <head>
     <meta charset="utf-8" />
@@ -21,7 +21,55 @@
     <!-- CSS Files -->
     <link id="pagestyle" href="{{ asset('assets/css/argon-dashboard.css') }}" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Efek hover pada card */
+        .card-hover {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Gabungkan kedua transisi */
+        }
 
+        .card-hover:hover {
+            transform: translateY(-4px); 
+            /* box-shadow: 0 0 2rem 0 rgba(136, 152, 170, 0.15); */
+            /* box-shadow: 0 0 2rem 0 rgba(136, 152, 170, 0.3); */
+            box-shadow: 0 4px 2rem rgba(136, 152, 170, 0.3);
+        }
+
+        /* Efek hover pada button */
+        .btn-hover {
+            transition: background-color 0.3s ease-in-out;
+        }
+        .btn-hover:hover {
+            background-color: #4e60e7; 
+        }
+
+        .href-hover {
+            display: inline-block; 
+            padding: 0px; 
+            transition: transform 0.15s ease-in-out;
+        }
+        .href-hover:hover {
+            transform: scale(1.05);
+        }
+
+        .tr-hover{
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .tr-hover:hover {
+            background-color: #F6F9FC; 
+        }
+
+        /* .nav-hover {
+            transition: background-color 0.3s ease, transform 0.3s ease; 
+        }
+
+        .nav-hover:hover {
+            background-color: #F6F9FC; 
+            transform: translateX(4px);
+        } */
+        
+        
+    </style>
 </head>
 
 <body class="{{ $class ?? '' }}">

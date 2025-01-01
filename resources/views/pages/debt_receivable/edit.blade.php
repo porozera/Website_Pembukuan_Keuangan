@@ -4,7 +4,7 @@
     @include('layouts.navbars.auth.topnav', ['title' => 'Detail Hutang Piutang'])
         <div class="container">
             <div class="container">
-                <div class="row">
+                <div class="row mb-10">
                     @if(session('success'))
                     <div class="alert alert-success" role="alert" id="successMessage">
                         {{ session('success') }}
@@ -12,10 +12,10 @@
                     @endif
                     <!-- Card 1 -->
                     <div class="col-5">
-                        <div class="card">
+                        <div class="card card-hover">
                             <div class="card-header pb-0">
                                 <div class="d-flex align-items-center">
-                                    <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#paymentModal">
+                                    <button class="btn btn-primary btn-sm btn-hover" data-bs-toggle="modal" data-bs-target="#paymentModal">
                                         Bayar
                                     </button>                                    
                                 </div>
@@ -62,7 +62,7 @@
                     
                     <!-- Card 2 -->
                     <div class="col-7">
-                        <div class="card mb-4">
+                        <div class="card card-hover mb-4">
                             <div class="card-header pb-0">
                                 <div class="row">
                                     <div class="col d-flex justify-content-between align-items-center">
@@ -101,7 +101,7 @@
                                                 $number = 1;
                                             @endphp
                                             @foreach ($payment as $item )
-                                            <tr>
+                                            <tr class="tr-hover">
                                                 <td class="align-middle text-center text-sm px-3">
                                                     <p class="text-xs font-weight-bold mb-0">{{$number++}}</p>
                                                 </td>
@@ -133,9 +133,11 @@
                                                 </td>                                        
                                             </tr>
                                             @endforeach
-        
                                         </tbody>
-                                    </table>                        
+                                    </table>   
+                                    <div class="card-footer">
+                                        
+                                    </div>                         
                             </div>
                         </div>
                     </div>

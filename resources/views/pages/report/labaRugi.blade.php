@@ -8,9 +8,9 @@
             {{ session('success') }}
         </div>
         @endif
-        <div class="row">
+        <div class="row mb-5">
             <div class="col-12">
-                <div class="card mb-4">
+                <div class="card mb-4 card-hover">
                     <div class="card-header pb-0">
                         <form method="GET" action="{{ route('reports.labarugi') }}">
                             <div class="row">

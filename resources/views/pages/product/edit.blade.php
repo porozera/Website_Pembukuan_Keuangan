@@ -3,9 +3,9 @@
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => 'Edit Products'])
         <div class="container">
-            <div class="row">
+            <div class="row mb-5">
                 <div class="col">
-                    <div class="card">
+                    <div class="card card-hover">
                         <div class="card-header pb-0">
                             <div class="d-flex align-items-center">
                                 <p class="mb-0"><b>Edit Products</b></p>
@@ -34,7 +34,7 @@
                                     </div>
                                     <div class="col-md-2">
                                         <div class="form-group">
-                                            <button type="button" class="btn btn-primary btn-sm w-100" data-bs-toggle="modal" data-bs-target="#editModal">
+                                            <button type="button" class="btn btn-primary btn-sm w-100 btn-hover" data-bs-toggle="modal" data-bs-target="#editModal">
                                                 Update
                                             </button>
                                         </div>

@@ -3,9 +3,9 @@
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => 'Detail HPP'])
         <div class="container">
-            <div class="row">
+            <div class="row mb-5">
                 <div class="col">
-                    <div class="card">
+                    <div class="card card-hover">
                         <div class="card-header pb-0">
                             <div class="d-flex align-items-center">
 
@@ -20,7 +20,7 @@
                                             <h7><b>Detail HPP</b></h7>
                                         </div>
                                         <div class="col-6 text-end">
-                                                <button type="button" class="btn btn-primary btn-sm w-20">
+                                                <button type="button" class="btn btn-primary btn-sm w-20 btn-hover">
                                                     <a href="/hpp/edit/{{$hpp['id']}}" class="text-white">
                                                         Edit <i class="fa fa-edit"></i>
                                                     </a>

@@ -43,7 +43,7 @@
                 <a class="nav-link {{ Route::currentRouteName() == 'karyawan' ? 'active' : '' }}" href="{{ route('karyawan') }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-circle-08 text-danger text-sm opacity-10"></i>
+                        <i class="ni ni-badge text-danger text-sm opacity-10"></i>
                     </div>
                     <span class="nav-link-text ms-1">Karyawan</span>
                 </a>
@@ -61,7 +61,7 @@
                 <a class="nav-link {{ Route::currentRouteName() == 'hpp' ? 'active' : '' }}" href="{{ route('hpp') }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-single-copy-04 text-primary text-sm opacity-10"></i>
+                        <i class="ni ni-paper-diploma text-primary text-sm opacity-10"></i>
                     </div>
                     <span class="nav-link-text ms-1">HPP</span>
                 </a>
@@ -70,7 +70,7 @@
                 <a class="nav-link {{ Route::currentRouteName() == 'reports.jurnal' ? 'active' : '' }}" href="{{ route('reports.jurnal') }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-single-copy-04 text-primary text-sm opacity-10"></i>
+                        <i class="ni ni-book-bookmark text-warning text-sm opacity-10"></i>
                     </div>
                     <span class="nav-link-text ms-1">Jurnal Umum</span>
                 </a>
@@ -79,7 +79,7 @@
                 <a class="nav-link {{ Route::currentRouteName() == 'reports.neraca' ? 'active' : '' }}" href="{{ route('reports.neraca') }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-single-copy-04 text-primary text-sm opacity-10"></i>
+                        <i class="ni ni-archive-2 text-success text-sm opacity-10"></i>
                     </div>
                     <span class="nav-link-text ms-1">Neraca Saldo</span>
                 </a>
@@ -88,7 +88,7 @@
                 <a class="nav-link {{ Route::currentRouteName() == 'reports.labarugi' ? 'active' : '' }}" href="{{ route('reports.labarugi') }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-single-copy-04 text-primary text-sm opacity-10"></i>
+                        <i class="ni ni-single-copy-04 text-info text-sm opacity-10"></i>
                     </div>
                     <span class="nav-link-text ms-1">Laporan Laba Rugi</span>
                 </a>
@@ -97,7 +97,7 @@
                 <a class="nav-link {{ Route::currentRouteName() == 'account' ? 'active' : '' }}" href="{{ route('account') }}">
                     <div
                         class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-key-25 text-warning text-sm opacity-10"></i>
+                        <i class="ni ni-key-25 text-primary text-sm opacity-10"></i>
                     </div>
                     <span class="nav-link-text ms-1">Akun</span>
                 </a>

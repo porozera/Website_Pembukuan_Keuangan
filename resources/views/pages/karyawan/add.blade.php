@@ -3,9 +3,9 @@
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => 'Tambah Karyawan'])
     <div class="container-fluid py-4">
-        <div class="row">
+        <div class="row mb-5">
             <div class="col-12">
-                <div class="card">
+                <div class="card card-hover">
                     <div class="card-header pb-0">
                         <div class="d-flex align-items-center">
                             <p class="mb-0"><b>Tambah Data Karyawan</b></p>
@@ -50,7 +50,7 @@
 
                                 <!-- Button -->
                                 <div class="col-md-12 d-flex justify-content-end">
-                                    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addModal">
+                                    <button type="button" class="btn btn-primary btn-sm btn-hover" data-bs-toggle="modal" data-bs-target="#addModal">
                                         Tambah
                                     </button>
                                 </div>

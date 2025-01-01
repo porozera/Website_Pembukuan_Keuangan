@@ -4,8 +4,8 @@
     @include('layouts.navbars.auth.topnav', ['title' => 'Dashboard'])
     <div class="container-fluid py-4">       
         <div class="row">
-            <div class="col-lg-6 mb-lg-0 mb-4">
-                <div class="card z-index-2 h-100">
+            <div class="col-lg-12 mb-lg-0 mb-4">
+                <div class="card card-hover z-index-2 h-100">
                     <div class="card-header pb-0 pt-3 bg-transparent">
                         <h6 class="text-capitalize">Pemasukan & Pengeluaran</h6>
                         <p class="text-sm mb-0">
@@ -26,13 +26,16 @@
                     </div>
                     <div class="card-footer">
                         <div class="text-end">
-                            <a href="/transaction" class="text-primary">Tampilkan detail <i class="ni ni-bold-right"></i></a>
+                            <a href="/transaction" class="text-primary href-hover">Tampilkan detail <i class="ni ni-bold-right"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
+            
+        </div>
+        <div class="row mt-4">
             <div class="col-lg-6 mb-lg-0 mb-4">
-                <div class="card z-index-2 h-100">
+                <div class="card card-hover z-index-2 h-100">
                     <div class="card-header pb-0 pt-3 bg-transparent">
                         <h6 class="text-capitalize">Hutang</h6>
                         <p class="text-sm mb-0">
@@ -53,16 +56,14 @@
                     </div>
                     <div class="card-footer">
                         <div class="text-end">
-                            <a href="/debt_receivable" class="text-primary">Tampilkan detail <i class="ni ni-bold-right"></i></a>
+                            <a href="/debt_receivable" class="text-primary href-hover">Tampilkan detail <i class="ni ni-bold-right"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row mt-4">
             <!-- Grafik Piutang -->
             <div class="col-lg-6 mb-lg-0 mb-4">
-                <div class="card z-index-2 h-100">
+                <div class="card card-hover z-index-2 h-100">
                     <div class="card-header pb-0 pt-3 bg-transparent">
                         <h6 class="text-capitalize">Piutang</h6>
                         <p class="text-sm mb-0">
@@ -83,7 +84,7 @@
                     </div>
                     <div class="card-footer">
                         <div class="text-end">
-                            <a href="/debt_receivable" class="text-primary">Tampilkan detail <i class="ni ni-bold-right"></i></a>
+                            <a href="/debt_receivable" class="text-primary href-hover">Tampilkan detail <i class="ni ni-bold-right"></i></a>
                         </div>
                     </div>
                 </div>

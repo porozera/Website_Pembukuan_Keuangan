@@ -10,7 +10,7 @@
         @endif
         <div class="row">
             <div class="col-12">
-                <div class="card mb-4">
+                <div class="card card-hover mb-4">
                     <div class="card-header pb-0">
                         <div class="row">
                             <div class="col d-flex justify-content-between align-items-center">
@@ -99,7 +99,7 @@
                                         $number = ($debt_receivable->currentPage() - 1) * $debt_receivable->perPage() + 1; 
                                     @endphp
                                     @forelse ($debt_receivable as $item )
-                                    <tr>
+                                    <tr class="tr-hover">
                                         <td class="align-middle text-start text-sm px-3">
                                             <p class="text-xs font-weight-bold mb-0">{{$number++}}</p>
                                         </td>
@@ -152,14 +152,14 @@
                                         </td>
     
                                         <td class="align-middle text-start text-sm px-3">
-                                            <a href="/debt_receivable/edit/{{$item['id']}}" class="text-primary font-weight-bold text-xs me-3"
+                                            <a href="/debt_receivable/edit/{{$item['id']}}" class="text-primary font-weight-bold text-xs me-3 href-hover"
                                                data-toggle="tooltip" data-original-title="Edit user">
                                                 <b>Bayar</b>
                                             </a>
                                             <form action="/debt_receivable/delete/{{ $item['id'] }}" method="POST" style="display:inline;">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="button" class="text-danger font-weight-bold text-xs" data-bs-toggle="modal" data-bs-target="#deleteModal" style="border:none;background:none;" data-id="{{ $item['id'] }}">
+                                                <button type="button" class="text-danger font-weight-bold text-xs href-hover" data-bs-toggle="modal" data-bs-target="#deleteModal" style="border:none;background:none;" data-id="{{ $item['id'] }}">
                                                     <b>Delete</b>
                                                 </button>
                                             </form>

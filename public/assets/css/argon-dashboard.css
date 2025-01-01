@@ -8,7 +8,7 @@
 :root,
 [data-bs-theme=light] {
   --bs-blue: #63B3ED;
-  --bs-indigo: #596CFF;
+  --bs-indigo: #4e60e7;
   --bs-purple: #6f42c1;
   --bs-pink: #d63384;
   --bs-red: #F56565;
@@ -4747,7 +4747,7 @@ fieldset:disabled .btn {
   color: var(--bs-nav-link-color);
   background: none;
   border: 0;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+  transition: color 0.15s ease-in-out, background-color 0.4s ease-in-out, border-color 0.15s ease-in-out,  transform 0.15s ease-in-out;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -4758,7 +4758,11 @@ fieldset:disabled .btn {
 
 .nav-link:hover,
 .nav-link:focus {
+  background-color: #F6F9FC; /* Warna latar belakang yang sama dengan active */
   color: var(--bs-nav-link-hover-color);
+  font-weight: 600; /* Mengubah font-weight saat hover agar mirip dengan active */
+  border-radius: 8px;
+  transform: translateX(5px); /* Rounded corner jika diinginkan */
 }
 
 .nav-link:focus-visible {

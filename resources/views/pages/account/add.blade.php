@@ -3,9 +3,9 @@
 @section('content')
     @include('layouts.navbars.auth.topnav', ['title' => 'Tambah Akun'])
         <div class="container">
-            <div class="row">
+            <div class="row mb-5">
                 <div class="col">
-                    <div class="card">
+                    <div class="card card-hover">
                         <div class="card-header pb-0">
                             <div class="d-flex align-items-center">
                                 <p class="mb-0"><b>Tambah Akun</b></p>
@@ -77,9 +77,12 @@
                                     </div>
 
                                     <div class="row">
+                                        <div class="col-md-10">
+
+                                        </div>
                                         <div class="col-md-2">
-                                            <div class="form-group">
-                                                <button type="button" class="btn btn-primary btn-sm w-100" data-bs-toggle="modal" data-bs-target="#addModal">
+                                            <div class="form-group text-end">
+                                                <button type="button" class="btn btn-primary btn-sm w-100 btn-hover" data-bs-toggle="modal" data-bs-target="#addModal">
                                                     Add
                                                 </button>
                                             </div>

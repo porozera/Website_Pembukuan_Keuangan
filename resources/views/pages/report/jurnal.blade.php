@@ -8,9 +8,9 @@
             {{ session('success') }}
         </div>
         @endif
-        <div class="row">
+        <div class="row mb-5">
             <div class="col-12">
-                <div class="card mb-4">
+                <div class="card mb-4 card-hover">
                     <div class="card-header pb-0">
                         <form method="GET" action="{{ route('reports.jurnal') }}">
                             <div class="row">
@@ -68,7 +68,6 @@
                                 
                                 <tbody>
                                     @foreach ($jurnal as $item )
-                                    
                                     <tr>
                                         <td class="align-middle text-start text-sm px-3" rowspan="2">
                                             <p class="text-xs font-weight-bold mb-0">{{$item->date}}</p>

@@ -8,14 +8,14 @@
             {{ session('success') }}
         </div>
         @endif
-        <div class="row">
+        <div class="row mb-5">
             <div class="col-12">
-                <div class="card mb-4">
+                <div class="card mb-4 card-hover">
                     <div class="card-header pb-0">
                         <div class="row">
                             <div class="col d-flex justify-content-between align-items-center">
                                 <h6><b>Tabel Harga Pokok Penjualan</b></h6>
-                                <button class="btn btn-primary btn-sm">
+                                <button class="btn btn-primary btn-sm btn-hover">
                                     <a href="/hpp/add" class="text-white">
                                         Tambah HPP <i class="fa fa-plus"></i>
                                     </a>
@@ -88,7 +88,7 @@
                                         $number = ($hpp->currentPage() - 1) * $hpp->perPage() + 1; 
                                     @endphp
                                     @foreach ($hpp as $item )
-                                    <tr> 
+                                    <tr class="tr-hover"> 
                                         <td class="align-middle text-start text-sm px-3">
                                             <p class="text-xs font-weight-bold mb-0">{{$number++}}</p>
                                         </td>
@@ -117,15 +117,15 @@
                                         </td>
     
                                         <td class="align-middle text-start text-sm px-3">
-                                            <a href="/hpp/detail/{{$item['id']}}" class="text-primary font-weight-bold text-xs me-3"
+                                            <a href="/hpp/detail/{{$item['id']}}" class="text-primary font-weight-bold text-xs me-3 href-hover"
                                                data-toggle="tooltip" data-original-title="Edit user">
-                                                Detail
+                                                <b>Detail</b>
                                             </a>
                                             <form action="/hpp/delete/{{ $item['id'] }}" method="POST" style="display:inline;" id="debtDeleteForm">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="button" class="text-danger font-weight-bold text-xs" data-bs-toggle="modal" data-bs-target="#deleteModal" style="border:none;background:none;" data-id="{{ $item['id'] }}">
-                                                    Delete
+                                                <button type="button" class="text-danger font-weight-bold text-xs href-hover" data-bs-toggle="modal" data-bs-target="#deleteModal" style="border:none;background:none;" data-id="{{ $item['id'] }}">
+                                                    <b>Delete</b>
                                                 </button>
                                             </form>
                                         </td>                                        

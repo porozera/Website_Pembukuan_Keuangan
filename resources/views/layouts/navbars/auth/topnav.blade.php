@@ -19,7 +19,7 @@
                         @csrf
                         <a href="{{ route('logout') }}"
                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                            class="nav-link text-white font-weight-bold px-0">
+                            class="text-white font-weight-bold px-0 href-hover">
                             <i class="fa fa-user me-sm-1"></i>
                             <span class="d-sm-inline d-none">Log out</span>
                         </a>
