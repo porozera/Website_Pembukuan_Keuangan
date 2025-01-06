@@ -111,48 +111,63 @@ class Debts_ReceivablesController extends Controller
         return redirect()->route('debt_receivable.edit', $attributes['debts_receivables_id'])->with('success', 'Payment created successfully!');
     }
     
-    public function delete($id){
-        Debts_Receivables::where('id',$id) -> delete();
-        return redirect('/debt_receivable')->with('success', 'Data deleted successfully!');
+    public function delete($id)
+    {
+        // Temukan data di tabel debts_receivables berdasarkan ID
+        $debtReceivable = Debts_Receivables::find($id);
+
+        if ($debtReceivable) {
+            // Hapus data terkait di tabel Transaction jika ada
+            if ($debtReceivable->transaction) {
+                $debtReceivable->transaction->delete();
+            }
+
+            // Hapus data di tabel debts_receivables
+            $debtReceivable->delete();
+
+            return redirect('/debt_receivable')->with('success', 'Data deleted successfully!');
+        }
+
+        return redirect('/debt_receivable')->with('error', 'Data not found!');
     }
 
     public function deletePayment($id)
-{
-    // Cari data Payment berdasarkan ID
-    $payment = Payment::findOrFail($id);
+    {
+        // Cari data Payment berdasarkan ID
+        $payment = Payment::findOrFail($id);
 
-    // Cari data Transaction terkait berdasarkan kode pembayaran
-    $transaction = Transaction::where('description', $payment->description)
-                               ->where('amount', $payment->paid_amount)
-                               ->where('date', $payment->date)
-                               ->first();
+        // Cari data Transaction terkait berdasarkan kode pembayaran
+        $transaction = Transaction::where('description', $payment->description)
+                                ->where('amount', $payment->paid_amount)
+                                ->where('date', $payment->date)
+                                ->first();
 
-    // Jika Transaction ditemukan, hapus datanya
-    if ($transaction) {
-        $transaction->delete();
+        // Jika Transaction ditemukan, hapus datanya
+        if ($transaction) {
+            $transaction->delete();
+        }
+
+        // Cari data Debts_Receivables terkait
+        $debts = Debts_Receivables::findOrFail($payment->debts_receivables_id);
+
+        // Kembalikan paid_amount ke kondisi sebelumnya
+        $debts->paid_amount -= $payment->paid_amount;
+        $debts->rest_amount = $debts->amount - $debts->paid_amount;
+
+        // Perbarui status berdasarkan rest_amount
+        if ($debts->rest_amount == 0) {
+            $debts->status = 'Lunas';
+        } else {
+            $debts->status = 'Belum Lunas';
+        }
+        $debts->save();
+
+        // Hapus Payment
+        $payment->delete();
+
+        // Redirect dengan pesan sukses
+        return redirect()->route('debt_receivable.edit', $debts->id)->with('success', 'Payment and related transaction deleted successfully!');
     }
-
-    // Cari data Debts_Receivables terkait
-    $debts = Debts_Receivables::findOrFail($payment->debts_receivables_id);
-
-    // Kembalikan paid_amount ke kondisi sebelumnya
-    $debts->paid_amount -= $payment->paid_amount;
-    $debts->rest_amount = $debts->amount - $debts->paid_amount;
-
-    // Perbarui status berdasarkan rest_amount
-    if ($debts->rest_amount == 0) {
-        $debts->status = 'Lunas';
-    } else {
-        $debts->status = 'Belum Lunas';
-    }
-    $debts->save();
-
-    // Hapus Payment
-    $payment->delete();
-
-    // Redirect dengan pesan sukses
-    return redirect()->route('debt_receivable.edit', $debts->id)->with('success', 'Payment and related transaction deleted successfully!');
-}
 
     
 }
